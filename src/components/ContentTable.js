@@ -19,7 +19,7 @@ class ContentTable extends Component {
     const fakeData=[{concept:'Ole',explanation:'Horizonite'}, {concept:'Khalid', explanation:'Dude'}]
     return (
       <div style={contentStyle}>
-        <div className="content-table" style={{border:'solid 2px red', height:'100%', overflow:'scroll'}}>
+        <div className="content-table" style={{height:'100%', overflow:'scroll'}}>
         <div className="content-input-container" style={{display:'flex',flexDirection:'row', width:'100%'}}>
             <input id="ConceptInput" style={{flex:1}}/>
             <input id="ExplanationInput" stlye={{flex:1}}/>
