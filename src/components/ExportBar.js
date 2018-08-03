@@ -8,9 +8,9 @@ class ExportBar extends Component {
   render() {
     const exportStyle = {
       background: "linear-gradient(#a0c3ff, #6AA1FF)",
-      height: "6vh",
+      height: "6%",
       display: "flex",
-      justifyContent: "space-around"
+      justifyContent: "space-around",
     }
     const exportElementStyle = {
       padding: "10px",

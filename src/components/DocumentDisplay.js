@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import FileDrop from "react-file-drop";
+import ReactCrop from "react-image-crop";
+import 'react-image-crop/dist/ReactCrop.css';
 
 class DocumentDisplay extends Component {
   constructor(props) {
@@ -8,16 +10,23 @@ class DocumentDisplay extends Component {
     this.state = {
       imageUrl: "",
       file: "",
-      displaying: false
+      displaying: false,
+      crop: {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+      },
+      croppedImage: "",
     }
   }
 
   handleDrop(files, event) {
     let reader = new FileReader();
     let file = files[0];
-    console.log(reader);
     reader.readAsDataURL(file);
     reader.onloadend = () => {
+      console.log(file);
       this.setState({
         imageUrl: reader.result,
         file: file,
@@ -26,28 +35,41 @@ class DocumentDisplay extends Component {
     }
   }
 
+  onCropChange(crop) {
+    this.setState({
+      crop: crop
+    });
+  }
+
   render() {
     const documentStyle = {
       height: "80vh",
+      padding: 0,
+      margin: 0,
       display: "flex",
       flex: 1,
       justifyContent: "center",
-      alignItems: "center"
+      alignItems: "center",
+      overflow: "auto"
     }
     const fileDropStyle = {
-      height: "100px",
-
+      height: "100%",
+      width: "100%",
     }
     const imageStyle = {
-      overflow: "scroll",
-      width: "100%",
+      minWidth: "100%",
+      maxWidth: "100%",
       border: "1px solid grey",
     }
     return (
       <div style={documentStyle}>
-        <div>
-          {this.state.displaying ? <img style={imageStyle} src={this.state.imageUrl}></img> : <FileDrop style={fileDropStyle} onDrop={(files, event) => this.handleDrop(files, event)}>Drop an image here!</FileDrop>}
-        </div>
+        {this.state.displaying ? <ReactCrop
+            crop={this.state.crop}
+            style={imageStyle} src={this.state.imageUrl}
+            onChange={(crop) => this.onCropChange(crop)}
+          />
+            :
+            <FileDrop style={fileDropStyle} onDrop={(files, event) => this.handleDrop(files, event)}>Drop an image here!</FileDrop>}
       </div>
     )
   }
