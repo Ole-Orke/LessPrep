@@ -18,4 +18,4 @@ class DocumentDisplay extends Component {
   }
 }
 
-export default ContentTable;
+export default DocumentDisplay;
