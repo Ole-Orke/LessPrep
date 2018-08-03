@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  vertical-align: middle;
 }
 
 .App-logo {
@@ -8,18 +9,31 @@
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+  vertical-align: middle;
+  background: linear-gradient(#a0c3ff, #6AA1FF);
+  height: 10%;
+  padding: 10px;
   color: white;
 }
 
 .App-title {
   font-size: 1.5em;
+  padding: 0;
+  margin: 0;
 }
 
 .App-intro {
   font-size: large;
+}
+
+.workspace-container {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  height: 80%;
+}
+
+div {
 }
 
 @keyframes App-logo-spin {
