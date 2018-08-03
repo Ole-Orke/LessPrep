@@ -12,10 +12,10 @@ class DocumentDisplay extends Component {
       file: "",
       displaying: false,
       crop: {
-        x: 10,
-        y: 10,
-        width: 80,
-        height: 80,
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
       },
       croppedImage: "",
     }
