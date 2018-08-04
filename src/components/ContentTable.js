@@ -5,7 +5,8 @@ class ContentTable extends Component {
     super(props);
     this.state={
       data:[],
-      newData:{concept:'',explanation:''}
+      newData:{concept:'',explanation:''},
+      isEditing: false
     }
   }
 
@@ -21,31 +22,59 @@ class ContentTable extends Component {
   }
 
   updateTable(event) {
+    console.log('inputIndex: ', this.state.inputIndex);
     var tempData = this.state.data.slice();
     console.log('TEMPDATA1', tempData)
     tempData.push(this.state.newData);
-    this.setState({data:tempData, newData:{concept:'',explanation:''}})
+    if ((this.state.newData.concept && this.state.newData.explanation) || isNaN(parseInt(event.target.attributes[1].value))) {
+      this.setState({data:tempData, newData:{concept:'',explanation:''}})
+    }
+    console.log('this.state.data: ', this.state.data)
   }
 
   updateConcept(event) {
     console.log('this: ',this)
-    var tempState = this.state
+    var tempState = this.state;
     tempState.newData.concept = event.target.value;
     this.setState({newData:tempState.newData})
+    console.log('newData: ', this.state.newData)
+  }
+
+  editConcept (event) {
+    var tempState = this.state;
+    tempState.data[event.target.attributes[1].value].concept = event.target.value;
+    this.setState({data:tempState.data, isEditing:true});
   }
 
   updateExplanation(event) {
-    var tempState = this.state
-    tempState.newData.explanation = event.target.value;
-    this.setState({newData:tempState.newData})
+    var tempState = this.state;
+    console.log("event.target.attributes[1].value: ", event.target.attributes[1].value);
+    if (event.target.attributes[1].value !== 'ExplanationInput') {
+      tempState.editContent.explanation = event.target.value;
+      this.setState({editContent:tempState.editContent});
+    } else {
+      tempState.newData.explanation = event.target.value;
+      this.setState({newData:tempState.newData})
+    }
   }
+
+  editExplanation(event) {
+    console.log('editExplanation called')
+    console.log('event.target.value: ', event.target.value)
+    var tempState = this.state;
+    console.log('tempState: ', tempState)
+    tempState.data[event.target.attributes[1].value].explanation = event.target.value;
+    this.setState({data:tempState.data, isEditing:true});
+    console.log('event.target.value: ', event.target.value)
+  }
+
 
 
 
 
   renderMap() {
     let result = [];
-    console.log('called')
+    console.log('render map called')
 
     const labelStyle = {
       display: 'flex',
@@ -57,69 +86,104 @@ class ContentTable extends Component {
     }
 
     const cellStyle1 = {
-      border:'solid #d2d2d2 1px'
+      border:'solid #d2d2d2 1px',
+      minHeight: '20px'
     }
 
     const cellStyle2 = {
       border:'solid #d2d2d2 1px',
-      backgroundColor: '#f7f9ff'
+      backgroundColor: '#f7f9ff',
+      minHeight: '20px'
+
     }
 
     let index = 0;
     this.state.data.map((pair) => {
-      index ++;
       result.push(
         <div className="col-sm-12" style={labelStyle}>
-          <div className="col-sm-6 cell" style={(index %2) ? cellStyle1 : cellStyle2 }>{pair.concept}</div>
-          <div className="col-sm-6 cell" style={(index %2) ? cellStyle1 : cellStyle2 }>{pair.explanation}</div>
-        </div>
-      )})
+          <input
+            className="col-sm-6 cell"
+            style={(index %2) ? cellStyle1 : cellStyle2}
+            rowindex={index}
+            onChange={(event)=>{this.editConcept(event); this.updateTable(event)}}
+            onKeyDown={(e)=>this.keyPress(e)}
+            // value={this.state.editContent ? this.state.editContent : pair.concept}
+            value={pair.concept}
+          />
+          <textarea
+            className="col-sm-6 cell"
+            style={(index %2) ? cellStyle1 : cellStyle2 }
+            rowindex={index}
+            onChange={(event)=>{this.editExplanation(event); this.updateTable(event)}}
+            value={pair.explanation}
+            >
+            </textarea>
+
+          </div>
+        )
+        index ++;
+      })
       return result;
-  }
-
-  render() {
-    const contentStyle = {
-      height: "80vh",
-      flex: 1,
-      borderLeft: "2px solid #e0e0e0",
-      width:'100%',
-      overflow:'scroll'
     }
 
-    const labelStyle = {
-      display: 'flex',
-      flexDirection: 'row'
-    }
+    render() {
+      const contentStyle = {
+        height: "80vh",
+        flex: 1,
+        borderLeft: "2px solid #e0e0e0",
+        width:'100%',
+        overflow:'scroll'
+      }
 
-    const inputStyle = {
-      display: 'flex',
-      flexDirection: 'row',
-      paddingTop: '7px'
-    }
+      const labelStyle = {
+        display: 'flex',
+        flexDirection: 'row'
+      }
+
+      const inputStyle = {
+        display: 'flex',
+        flexDirection: 'row',
+        paddingTop: '7px'
+      }
 
 
 
-    console.log('data: ', this.state.data)
+      console.log('data: ', this.state.data)
 
-    return (
-      <div style={contentStyle}>
-        <div className="content-table" style={{height:'100%', width:'100%'}}>
-          <div className="table-labels" style={labelStyle}>
-            <div className="col-sm-6">Concept:</div>
-            <div className="col-sm-6">Explanation:</div>
-          </div>
-          <div id="table-data">
-            {this.renderMap()}
+      return (
+        <div style={contentStyle}>
+          <div className="content-table" style={{height:'100%', width:'100%'}}>
+            <div className="table-labels" style={labelStyle}>
+              <div className="col-sm-6">Concept:</div>
+              <div className="col-sm-6">Explanation:</div>
             </div>
-          <div className="content-input-container" style={inputStyle}>
-            <input className="col-sm-6" id="ConceptInput" placeholder="New concept" onChange={(event)=>(this.updateConcept(event))} onKeyDown={(e)=>this.keyPress(e)} value={this.state.newData.concept}/>
-            <input className="col-sm-6" id="ExplanationInput" placeholder="New explanation" onChange={(event)=>(this.updateExplanation(event))} onKeyDown={(e)=>this.keyPress(e)} value={this.state.newData.explanation}/>
+            <div id="table-data">
+              {this.renderMap()}
+            </div>
+            <div className="content-input-container" style={inputStyle}>
+              <input
+                className="col-sm-6"
+                id="ConceptInput" placeholder="New concept"
+                onChange={(event)=>(this.updateConcept(event))}
+                onKeyDown={(e)=>this.keyPress(e)}
+                value={this.state.newData.concept}
+                onClick={()=>this.setState({isEditing:false})}
+              />
+              <input
+                className="col-sm-6"
+                id="ExplanationInput"
+                placeholder="New explanation"
+                onChange={(event)=>(this.updateExplanation(event))}
+                onKeyDown={(e)=>this.keyPress(e)}
+                value={this.state.newData.explanation}
+                onClick={()=>this.setState({isEditing:false})}
+              />
+            </div>
+            <input type="submit" className="col-sm-12" value="Add new" onClick={(e)=>this.updateTable(e)}/>
           </div>
-          <input type="submit" className="col-sm-12" value="Add new" onClick={(e)=>this.updateTable(e)}/>
         </div>
-      </div>
-    )
+      )
+    }
   }
-}
 
-export default ContentTable;
+  export default ContentTable;
