@@ -6,7 +6,27 @@ import ExportBar from "./components/ExportBar.js";
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      outputText: "",
+    }
+  }
+
+  exportPpt() {
+
+  }
+
+  sendOutputText = (output) => {
+    console.log("sendOutputText called!\n", output);
+    this.setState({
+      outputText: output
+    });
+  }
+
   render() {
+    console.log(this.sendOutputText);
     return (
       <div className="Window">
         <div className="App">
@@ -15,10 +35,10 @@ class App extends Component {
           </header>
         </div>
         <div className="workspace-container">
-          <DocumentDisplay />
-          <ContentTable />
+          <DocumentDisplay send={(output) => this.sendOutputText(output)} />
+          <ContentTable  />
         </div>
-        <ExportBar />
+        <ExportBar outputText={this.state.outputText}/>
       </div>
     );
   }

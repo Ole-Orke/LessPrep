@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import FileDrop from "react-file-drop";
 import ReactCrop from "react-image-crop";
 import 'react-image-crop/dist/ReactCrop.css';
-import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const Tesseract = window.Tesseract;
 
@@ -99,6 +98,8 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
           outputText: result.text,
           tessFinish: true
         });
+        console.log(this.props.send);
+        this.props.send(result.text);
       });
   }
 
@@ -128,12 +129,6 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
               onChange={(crop) => this.onCropChange(crop)}
               onComplete={(crop, pixelcrop) => this.onCropComplete(crop, pixelcrop)}
             />
-            <div>
-              <CopyToClipboard text={this.state.outputText}
-                onCopy={() => {console.log("copied!")}}>
-                <button className="btn btn-primary">Copy to clipboard</button>
-              </CopyToClipboard>
-            </div>
           </div>
             :
             <FileDrop style={fileDropStyle} id="croppedImage" onDrop={(files, event) => this.handleDrop(files, event)}>Drop an image here!</FileDrop>}
