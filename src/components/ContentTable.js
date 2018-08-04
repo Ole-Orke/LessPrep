@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Textarea from 'react-textarea-autosize';
 
 class ContentTable extends Component {
   constructor(props) {
@@ -110,15 +111,13 @@ class ContentTable extends Component {
             // value={this.state.editContent ? this.state.editContent : pair.concept}
             value={pair.concept}
           />
-          <textarea
+          <Textarea
             className="col-sm-6 cell"
             style={(index %2) ? cellStyle1 : cellStyle2 }
             rowindex={index}
             onChange={(event)=>{this.editExplanation(event); this.updateTable(event)}}
             value={pair.explanation}
-            >
-            </textarea>
-
+          />
           </div>
         )
         index ++;
@@ -169,7 +168,7 @@ class ContentTable extends Component {
                 value={this.state.newData.concept}
                 onClick={()=>this.setState({isEditing:false})}
               />
-              <input
+              <Textarea
                 className="col-sm-6"
                 id="ExplanationInput"
                 placeholder="New explanation"
