@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "react": "^16.4.2",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.4.2",
     "react-file-drop": "^0.2.6",
     "react-image-crop": "^4.0.2",

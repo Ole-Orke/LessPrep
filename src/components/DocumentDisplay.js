@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FileDrop from "react-file-drop";
 import ReactCrop from "react-image-crop";
 import 'react-image-crop/dist/ReactCrop.css';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const Tesseract = window.Tesseract;
 
@@ -97,7 +98,7 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
         this.setState({
           outputText: result.text,
           tessFinish: true
-        })
+        });
       });
   }
 
@@ -109,8 +110,8 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
       display: "flex",
       flex: 1,
       justifyContent: "center",
-      alignItems: "center",
-      overflow: "auto"
+      overflow: "auto",
+      textAlign: "center"
     }
     const fileDropStyle = {
       height: "100%",
@@ -120,18 +121,17 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
       <div style={documentStyle}>
         {this.state.displaying ?
           <div>
-            <h4>
-              {this.state.tessFinish ? <p>Finished</p> : <p>Working...</p>}
-            </h4>
-            <div>
-              <ReactCrop
-                style={this.state.tessFinish ? {border: "3px solid green"} :{border: "3px solid red"}}
-                crop={this.state.crop}
-                src={this.state.imageUrl}
-                onChange={(crop) => this.onCropChange(crop)}
-                onComplete={(crop, pixelcrop) => this.onCropComplete(crop, pixelcrop)}
-              />
-            </div>
+            <ReactCrop
+              style={this.state.tessFinish ? {border: "3px solid green"} : {border: "3px solid red"}}
+              crop={this.state.crop}
+              src={this.state.imageUrl}
+              onChange={(crop) => this.onCropChange(crop)}
+              onComplete={(crop, pixelcrop) => this.onCropComplete(crop, pixelcrop)}
+            />
+            <CopyToClipboard text={this.state.outputText}
+              onCopy={() => {console.log("copied!")}}>
+              <button className="btn btn-primary">Copy to clipboard</button>
+            </CopyToClipboard>
           </div>
             :
             <FileDrop style={fileDropStyle} id="croppedImage" onDrop={(files, event) => this.handleDrop(files, event)}>Drop an image here!</FileDrop>}
