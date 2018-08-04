@@ -7,7 +7,8 @@
     "react-dom": "^16.4.2",
     "react-file-drop": "^0.2.6",
     "react-image-crop": "^4.0.2",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "tesseract.js": "^1.0.10"
   },
   "scripts": {
     "start": "react-scripts start",

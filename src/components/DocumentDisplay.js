@@ -3,6 +3,8 @@ import FileDrop from "react-file-drop";
 import ReactCrop from "react-image-crop";
 import 'react-image-crop/dist/ReactCrop.css';
 
+const Tesseract = window.Tesseract;
+
 class DocumentDisplay extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +20,8 @@ class DocumentDisplay extends Component {
         height: 0,
       },
       croppedImage: "",
+      outputText: "",
+      tessFinish: false
     }
   }
 
@@ -41,7 +45,6 @@ class DocumentDisplay extends Component {
     this.setState({
       crop: crop
     });
-    console.log(this.state.crop);
   }
 
   /**
@@ -85,8 +88,17 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
     console.log("pixelcrop", pixelcrop);
     const croppedImage = this.getCroppedImg(this.state.imageUrl, pixelcrop, "outputImage");
     this.setState({
-      croppedImage: croppedImage
+      croppedImage: croppedImage,
+      tessFinish: false,
     });
+    Tesseract.recognize(croppedImage)
+      .then((result) => {
+        console.log(result.text);
+        this.setState({
+          outputText: result.text,
+          tessFinish: true
+        })
+      });
   }
 
   render() {
@@ -108,12 +120,18 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
       <div style={documentStyle}>
         {this.state.displaying ?
           <div>
-            <ReactCrop
-              crop={this.state.crop}
-              src={this.state.imageUrl}
-              onChange={(crop) => this.onCropChange(crop)}
-              onComplete={(crop, pixelcrop) => this.onCropComplete(crop, pixelcrop)}
-            />
+            <h4>
+              {this.state.tessFinish ? <p>Finished</p> : <p>Working...</p>}
+            </h4>
+            <div>
+              <ReactCrop
+                style={this.state.tessFinish ? {border: "3px solid green"} :{border: "3px solid red"}}
+                crop={this.state.crop}
+                src={this.state.imageUrl}
+                onChange={(crop) => this.onCropChange(crop)}
+                onComplete={(crop, pixelcrop) => this.onCropComplete(crop, pixelcrop)}
+              />
+            </div>
           </div>
             :
             <FileDrop style={fileDropStyle} id="croppedImage" onDrop={(files, event) => this.handleDrop(files, event)}>Drop an image here!</FileDrop>}
