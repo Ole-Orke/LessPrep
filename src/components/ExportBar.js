@@ -29,7 +29,7 @@ class ExportBar extends Component {
           </CopyToClipboard>
         </div>
         <div style={exportElementStyle}>
-          <button className="btn btn-primary">Export</button>
+          <button onClick={() => {console.log(this.props.table)}} className="btn btn-primary">Export</button>
         </div>
       </div>
     )

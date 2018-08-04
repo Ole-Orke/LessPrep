@@ -11,11 +11,18 @@ class App extends Component {
 
     this.state = {
       outputText: "",
+      tableData: [],
     }
   }
 
   exportPpt() {
 
+  }
+
+  sendTable = (output) => {
+    this.setState({
+      tableData: output
+    });
   }
 
   sendOutputText = (output) => {
@@ -36,9 +43,9 @@ class App extends Component {
         </div>
         <div className="workspace-container">
           <DocumentDisplay send={(output) => this.sendOutputText(output)} />
-          <ContentTable  />
+          <ContentTable  send={(output) => this.sendTable(output)}/>
         </div>
-        <ExportBar outputText={this.state.outputText}/>
+        <ExportBar outputText={this.state.outputText} table={this.state.tableData}/>
       </div>
     );
   }

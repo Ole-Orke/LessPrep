@@ -25,8 +25,10 @@ class ContentTable extends Component {
     var tempData = this.state.data.slice();
     console.log('TEMPDATA1', tempData)
     tempData.push(this.state.newData);
-    if ((this.state.newData.concept && this.state.newData.explanation) || isNaN(parseInt(event.target.attributes[1].value))) {
-      this.setState({data:tempData, newData:{concept:'',explanation:''}})
+    if ((this.state.newData.concept && this.state.newData.explanation)) {
+      this.setState({data:tempData, newData:{concept:'',explanation:''}}, () => {
+        this.props.send(this.state.data);
+      });
     }
     console.log('this.state.data: ', this.state.data)
   }
