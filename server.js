@@ -23,14 +23,16 @@ passport.deserializeUser(function(id, done) {
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    console.log("called");
+    console.log(username, password);
     User.findOne({ email: username }, function (err, user) {
       if (err) { return done(err); }
       if (!user) { return done(null, false); }
       hash = user.password;
+      console.log(hash);
       bcrypt.compare(password, hash)
         .then((valid) => {
           if(valid) {
+            console.log("valid");
             return done(null, user);
           }
           else {
@@ -98,9 +100,21 @@ app.post("/api/user/register", (req, res) => {
   });
 });
 
-app.post("/api/user/login", passport.authenticate("local", {
-  successRedirect: "/",
-  failureRedirect: "/"
-}));
+app.post("/api/user/login",
+  passport.authenticate("local"),
+  (req, res) => {
+    console.log(req.user);
+    res.json({
+      success: true
+    });
+  }
+);
+
+app.get("/api/user/logout", (req, res) => {
+  req.logout();
+  res.json({
+    success: true
+  });
+})
 
 app.listen(process.env.PORT || 1337);
