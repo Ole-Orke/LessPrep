@@ -128,10 +128,12 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
               onChange={(crop) => this.onCropChange(crop)}
               onComplete={(crop, pixelcrop) => this.onCropComplete(crop, pixelcrop)}
             />
-            <CopyToClipboard text={this.state.outputText}
-              onCopy={() => {console.log("copied!")}}>
-              <button className="btn btn-primary">Copy to clipboard</button>
-            </CopyToClipboard>
+            <div>
+              <CopyToClipboard text={this.state.outputText}
+                onCopy={() => {console.log("copied!")}}>
+                <button className="btn btn-primary">Copy to clipboard</button>
+              </CopyToClipboard>
+            </div>
           </div>
             :
             <FileDrop style={fileDropStyle} id="croppedImage" onDrop={(files, event) => this.handleDrop(files, event)}>Drop an image here!</FileDrop>}
