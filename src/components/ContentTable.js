@@ -115,7 +115,7 @@ class ContentTable extends Component {
 
     return (
       <div style={contentStyle}>
-        <div className="content-table" style={{height:'100%', width:'100%', overflow:'scroll'}}>
+        <div className="content-table" style={{height:'100%', width:'100%'}}>
           <div className="table-labels" style={labelStyle}>
             <div className="col-sm-6">Concept:</div>
             <div className="col-sm-6">Explanation:</div>
