@@ -12,8 +12,6 @@ class ContentTable extends Component {
   }
 
   componentDidMount(){
-    const fakeData=[{concept:'Ole',explanation:'Horizoniteeeeeeeeerererererererererererasraser asra sraseraser asrasf asdvcas fasef asd vasdvas dvasd asdf asdv asdf '}, {concept:'Khalid', explanation:'Dude'}];
-    this.setState({data:fakeData});
   };
 
   keyPress(event){
@@ -153,8 +151,8 @@ class ContentTable extends Component {
         <div style={contentStyle}>
           <div className="content-table" style={{height:'100%', width:'100%'}}>
             <div className="table-labels" style={labelStyle}>
-              <div className="col-sm-6">Concept:</div>
-              <div className="col-sm-6">Explanation:</div>
+              <div className="col-sm-6"><strong>Concept:</strong></div>
+              <div className="col-sm-6"><strong>Explanation:</strong></div>
             </div>
             <div id="table-data">
               {this.renderMap()}
