@@ -108,3 +108,7 @@ div {
   background-color: #eaf2ff;
   /*box-shadow: 0 0 13px 3px #c6dcff;*/
 }
+
+.cell {
+  word-break: break-all;
+}
