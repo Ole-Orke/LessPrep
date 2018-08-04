@@ -9,8 +9,7 @@
     "react-file-drop": "^0.2.6",
     "react-image-crop": "^4.0.2",
     "react-scripts": "1.1.4",
-    "react-textarea-autosize": "^7.0.4",
-    "tesseract.js": "^1.0.10"
+    "react-textarea-autosize": "^7.0.4"
   },
   "scripts": {
     "start": "react-scripts start",

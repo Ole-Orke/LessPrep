@@ -176,7 +176,7 @@ class ContentTable extends Component {
                 onClick={()=>this.setState({isEditing:false})}
               />
             </div>
-            <input type="submit" className="col-sm-12" value="Add new" onClick={(e)=>this.updateTable(e)}/>
+            <button type="submit" className="col-sm-12 btn btn-light" onClick={(e)=>this.updateTable(e)}><strong>Add new</strong></button>
           </div>
         </div>
       )

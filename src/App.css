@@ -36,6 +36,18 @@
 div {
 }
 
+.btn-light {
+  background-color: #A0C3FF;
+  border-color: #A0C3FF;
+  color: white;
+}
+
+.btn-light:hover {
+  background-color: #6AA1FF;
+  border-color: #6AA1FF;
+  color: white;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
