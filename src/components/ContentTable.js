@@ -70,8 +70,8 @@ class ContentTable extends Component {
       index ++;
       result.push(
         <div className="col-sm-12" style={labelStyle}>
-          <div className="col-sm-6" style={(index %2) ? cellStyle1 : cellStyle2 }>{pair.concept}</div>
-          <div className="col-sm-6" style={(index %2) ? cellStyle1 : cellStyle2 }>{pair.explanation}</div>
+          <div className="col-sm-6 cell" style={(index %2) ? cellStyle1 : cellStyle2 }>{pair.concept}</div>
+          <div className="col-sm-6 cell" style={(index %2) ? cellStyle1 : cellStyle2 }>{pair.explanation}</div>
         </div>
       )})
       return result;
@@ -97,18 +97,6 @@ class ContentTable extends Component {
       paddingTop: '7px'
     }
 
-    const cellStyle = {
-      border:'solid #d2d2d2 1px'
-    }
-
-    const cellStyle1 = {
-      border:'solid #d2d2d2 1px'
-    }
-
-    const cellStyle2 = {
-      border:'solid #d2d2d2 1px',
-      backgroundColor: '#c8cace'
-    }
 
 
     console.log('data: ', this.state.data)
@@ -121,13 +109,6 @@ class ContentTable extends Component {
             <div className="col-sm-6">Explanation:</div>
           </div>
           <div id="table-data">
-          {/* {this.state.data.map((pair) => {
-            return (
-              <div className="col-sm-12" style={labelStyle}>
-                <div className="col-sm-6" style={(index %2) ? cellStyle1 : cellStyle2 }>{pair.concept}</div>
-                <div className="col-sm-6" style={cellStyle}>{pair.explanation}</div>
-              </div>
-            )})} */}
             {this.renderMap()}
             </div>
           <div className="content-input-container" style={inputStyle}>
