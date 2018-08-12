@@ -4,6 +4,7 @@
   "proxy": "http://localhost:1337",
   "private": true,
   "dependencies": {
+    "chalk": "^2.0.1",
     "jspdf": "^1.4.1",
     "bcrypt": "^3.0.0",
     "body-parser": "^1.18.3",
