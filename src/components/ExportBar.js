@@ -117,7 +117,7 @@ class ExportBar extends Component {
   //   });
 
   makeFlashcards(tableData) {
-    var flashcardPdf = new jsPDF();
+    var flashcardPdf = new jsPdf();
     var len = tableData.length;
     var conceptArr = [];
     var explanationArr = [];
