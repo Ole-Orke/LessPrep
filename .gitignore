@@ -56,6 +56,9 @@ typings/
 
 # dotenv environment variables file
 .env
+env.sh
+#Windows environment variables file
+env.cmd
 
 # next.js build output
 .next

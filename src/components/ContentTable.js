@@ -48,14 +48,19 @@ class ContentTable extends Component {
   }
 
   updateExplanation(event) {
-    var tempState = this.state;
-    console.log("event.target.attributes[1].value: ", event.target.attributes[1].value);
-    if (event.target.attributes[1].value !== 'ExplanationInput') {
-      tempState.editContent.explanation = event.target.value;
-      this.setState({editContent:tempState.editContent});
+    console.log('explanation length: ', event.target.value.length)
+    if (event.target.value.length > 32*13) {
+      alert('Maximum explanation size reached');
     } else {
-      tempState.newData.explanation = event.target.value;
-      this.setState({newData:tempState.newData})
+      var tempState = this.state;
+      console.log("event.target.attributes[1].value: ", event.target.attributes[1].value);
+      if (event.target.attributes[1].value !== 'ExplanationInput') {
+        tempState.editContent.explanation = event.target.value;
+        this.setState({editContent:tempState.editContent});
+      } else {
+        tempState.newData.explanation = event.target.value;
+        this.setState({newData:tempState.newData})
+      }
     }
   }
 
