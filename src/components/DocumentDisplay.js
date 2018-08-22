@@ -103,6 +103,23 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
       });
   }
 
+  reset() {
+    this.setState({
+      imageUrl: "",
+      file: "",
+      displaying: false,
+      crop: {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+      },
+      croppedImage: "",
+      outputText: "",
+      tessFinish: false
+    });
+  }
+
   render() {
     const documentStyle = {
       height: "80vh",
