@@ -23,7 +23,7 @@ class ExportBar extends Component {
     // console.log(this.props.table);
     let fileName = prompt('Filename:', 'Ex: my-flashcards');
     console.log('fileName: ', fileName)
-    let flashcardPdf = new jsPdf();
+    // let flashcardPdf = new jsPdf();
     let tableVals = this.props.table.slice();
     let tableLength  = tableVals.length;
     let pagesToMake = Math.ceil(tableLength / 6);
@@ -38,14 +38,46 @@ class ExportBar extends Component {
     // let d = [147, 148.5];
     // let e = [42, 247.5];
     // let f = [147, 247.5];
-    let conceptPosition = [[42, 49.5],[147, 49.5],[42, 148.5],[147, 148.5],[42, 247.5],[147, 247.5]];
-    let explanationPosition = [[147, 49.5],[42, 49.5],[147, 148.5],[42, 148.5],[147, 247.5],[42, 247.5]]
+    // let conceptPosition =     [[42, 49.5],[147, 49.5],[42, 148.5],[147, 148.5],[42, 247.5],[147, 247.5]];
+    // let explanationPosition = [[147, 49.5],[42, 49.5],[147, 148.5],[42, 148.5],[147, 247.5],[42, 247.5]]
+    let conceptPosition = [[12, 14.5],[117, 14.5],[12, 113.5],[117, 113.5],[12, 212.5],[117, 212.5]];
+    let explanationPosition = [[117, 14.5],[12, 14.5],[117, 113.5], [12, 113.5],[117, 212.5],[12, 212.5]]
+
+
+    tableVals.forEach((value) => {
+      if (value.concept.length > 32) {
+        let newVals = [];
+        console.log('newVals type: ', typeof newVals);
+        for (let a = 0; a < value.concept.length; a += 32) {
+          var line = value.concept.slice(a,Math.min(a+32, value.concept.length - 1));
+          newVals.push(line);
+        }
+        value.concept = newVals;
+      }
+
+      if (value.explanation.length > 32) {
+        let newVals = [];
+        console.log('newVals type: ', typeof newVals);
+        for (let a = 0; a < value.explanation.length; a += 32) {
+          var line = value.explanation.slice(a,Math.min(a+32, value.explanation.length - 1));
+          newVals.push(line);
+        }
+        value.explanation = newVals;
+      }
+    })
+
     // Big loop, one for each set of 6
     for (let i = 1; i <= pagesToMake; i++) {
       // if(i > 1) {
       //   flashcardPdf.addPage();
       // }
       // let pageNum = i;
+      if (! flashcardPdf) {
+        var flashcardPdf = new jsPdf();
+      } else {
+        flashcardPdf.addPage()
+      }
+
       flashcardPdf.lines([[210,0]],0, 99);
       flashcardPdf.lines([[210,0]],0, 198);
       flashcardPdf.lines([[0,297]],105, 0);
@@ -73,7 +105,7 @@ class ExportBar extends Component {
         flashcardPdf.text(tableVals[0]['explanation'], explanationPosition[k][0],explanationPosition[k][1]);
         tableVals.shift();
       }
-      flashcardPdf.addPage();
+      // flashcardPdf.addPage();
     }
     flashcardPdf.save(fileName);
   }
