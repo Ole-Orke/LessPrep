@@ -132,7 +132,7 @@ class ContentTable extends Component {
 
     render() {
       const contentStyle = {
-        height: "80vh",
+        height: "88vh",
         flex: 1,
         borderLeft: "2px solid #e0e0e0",
         width:'100%',

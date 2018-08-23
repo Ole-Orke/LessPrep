@@ -74,10 +74,21 @@ class App extends Component {
         </div>
         {this.state.sessionStarted ? <div>
           <div className="workspace-container">
-            <DocumentDisplay send={(output) => this.sendOutputText(output)} />
+            <DocumentDisplay
+              handleFileDrop={(result, file) => this.props.handleFileDrop(result, file)}
+              onCropChange={(crop) => this.props.onCropChange(crop)}
+              onCropComplete={(text) => this.props.onCropComplete(text)}
+              store={this.props.store}
+              setCroppedImage={(croppedImage) => this.props.setCroppedImage(croppedImage)}
+              send={(output) => this.sendOutputText(output)}
+            />
             <ContentTable  send={(output) => this.sendTable(output)}/>
           </div>
-          <ExportBar outputText={this.state.outputText} table={this.state.tableData}/>
+          <ExportBar
+            store={this.props.store}
+            outputText={this.state.outputText} table={this.state.tableData}
+            reset={() => this.props.reset()}
+          />
         </div>
         :
         <div>
@@ -89,11 +100,5 @@ class App extends Component {
     );
   }
 }
-
-
-
-
-
-
 
 export default App;

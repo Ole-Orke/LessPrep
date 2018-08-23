@@ -97,6 +97,10 @@ class ExportBar extends Component {
       height: "6%",
       display: "flex",
       justifyContent: "space-around",
+      position: "absolute",
+      bottom: "0",
+      right: "0",
+      width: "100vw",
     }
     const exportElementStyle = {
       padding: "10px",
@@ -122,10 +126,10 @@ class ExportBar extends Component {
     return (
       <div style={exportStyle}>
         <div style={exportElementStyle}>
-          <button className="btn btn-primary">Reset</button>
+          <button onClick={() => this.props.reset()} className="btn btn-primary">Reset</button>
         </div>
         <div style={exportElementStyle}>
-          <CopyToClipboard text={this.props.outputText}
+          <CopyToClipboard text={this.props.store.getState().outputText}
             onCopy={() => {console.log("copied!")}}>
             <button className="btn btn-primary">Copy to clipboard</button>
           </CopyToClipboard>

@@ -11,31 +11,36 @@ class Registration extends Component {
   }
 
   register() {
-    fetch('/api/user/register', {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password,
+    if (this.state.email && this.state.password) {
+      fetch('/api/user/register', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password,
+        })
       })
-    })
-    .then((res)=> (res.json()))
-    .then((resJson) => {
-      console.log(resJson);
-      if (resJson.success) {
-        console.log("Registration successful");
-        this.props.goToLogin();
-      }
-      else {
-        console.log("Registration failed");
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+      .then((res)=> (res.json()))
+      .then((resJson) => {
+        console.log(resJson);
+        if (resJson.success) {
+          console.log("Registration successful");
+          this.props.goToLogin();
+        }
+        else {
+          console.log("Registration failed");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
+    else {
+      alert("Email and password are required!");
+    }
   }
 
   onEmailChange(event){
@@ -72,12 +77,12 @@ class Registration extends Component {
           </div>
           <div className="form-group">
             <label>Email address</label>
-            <input type="email" className="form-control" onChange={(event) => this.onEmailChange(event)} value={this.state.email} placeholder="Enter email" />
+            <input type="email" className="form-control" onChange={(event) => this.onEmailChange(event)} value={this.state.email} placeholder="Enter email" required/>
             <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
           <div className="form-group">
             <label>Password</label>
-            <input type="password" className="form-control" onChange={(event) => this.onPasswordChange(event)} value={this.state.password} placeholder="Password" />
+            <input type="password" className="form-control" onChange={(event) => this.onPasswordChange(event)} value={this.state.password} placeholder="Password" required/>
           </div>
           <div style={{display: "flex", justifyContent: "space-around"}}>
             <button onClick={() => this.register()} className="btn btn-light">

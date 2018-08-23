@@ -8,21 +8,6 @@ const Tesseract = window.Tesseract;
 class DocumentDisplay extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      imageUrl: "",
-      file: "",
-      displaying: false,
-      crop: {
-        x: 0,
-        y: 0,
-        width: 0,
-        height: 0,
-      },
-      croppedImage: "",
-      outputText: "",
-      tessFinish: false
-    }
   }
 
   handleDrop(files, event) {
@@ -33,7 +18,10 @@ class DocumentDisplay extends Component {
       console.log(file);
       let image = new Image();
       image.src = reader.result;
-      this.setState({
+      console.log("Store: ", this.props.store.getState());
+      this.props.handleFileDrop(reader.result, file);
+      console.log("Store: ", this.props.store.getState());
+      this.setState({ //HANDLE_FILE_DROP
         imageUrl: reader.result,
         file: file,
         displaying: true,
@@ -42,9 +30,11 @@ class DocumentDisplay extends Component {
   }
 
   onCropChange(crop) {
-    this.setState({
-      crop: crop
-    });
+    this.props.onCropChange(crop);
+    console.log("Store:", this.props.store.getState());
+    // this.setState({
+    //   crop: crop
+    // });
   }
 
   /**
@@ -86,43 +76,26 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
 
   onCropComplete(crop, pixelcrop) {
     console.log("pixelcrop", pixelcrop);
-    const croppedImage = this.getCroppedImg(this.state.imageUrl, pixelcrop, "outputImage");
-    this.setState({
-      croppedImage: croppedImage,
-      tessFinish: false,
-    });
+    const croppedImage = this.getCroppedImg(this.props.store.getState().imageUrl, pixelcrop, "outputImage");
+    this.props.setCroppedImage(croppedImage);
+    // this.setState({
+    //   croppedImage: croppedImage,
+    //   tessFinish: false,
+    // });
     Tesseract.recognize(croppedImage)
       .then((result) => {
         console.log(result.text);
-        this.setState({
-          outputText: result.text,
-          tessFinish: true
-        });
-        console.log(this.props.send);
-        this.props.send(result.text);
+        this.props.onCropComplete(result.text);
+        // this.setState({
+        //   outputText: result.text,
+        //   tessFinish: true
+        // });
       });
-  }
-
-  reset() {
-    this.setState({
-      imageUrl: "",
-      file: "",
-      displaying: false,
-      crop: {
-        x: 0,
-        y: 0,
-        width: 0,
-        height: 0,
-      },
-      croppedImage: "",
-      outputText: "",
-      tessFinish: false
-    });
   }
 
   render() {
     const documentStyle = {
-      height: "80vh",
+      height: "88vh",
       padding: 0,
       margin: 0,
       display: "flex",
@@ -137,12 +110,12 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
     }
     return (
       <div style={documentStyle}>
-        {this.state.displaying ?
+        {this.props.store.getState().displaying ?
           <div>
             <ReactCrop
-              style={this.state.tessFinish ? {border: "3px solid green"} : {border: "3px solid red"}}
-              crop={this.state.crop}
-              src={this.state.imageUrl}
+              style={this.props.store.getState().tessFinish ? {border: "3px solid green"} : {border: "3px solid red"}}
+              crop={this.props.store.getState().crop}
+              src={this.props.store.getState().imageUrl}
               onChange={(crop) => this.onCropChange(crop)}
               onComplete={(crop, pixelcrop) => this.onCropComplete(crop, pixelcrop)}
             />
