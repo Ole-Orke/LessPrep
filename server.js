@@ -8,6 +8,7 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const saltRounds = 10;
+require('dotenv').config();
 
 //Passport initialize
 
