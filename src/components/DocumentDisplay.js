@@ -18,23 +18,13 @@ class DocumentDisplay extends Component {
       console.log(file);
       let image = new Image();
       image.src = reader.result;
-      console.log("Store: ", this.props.store.getState());
       this.props.handleFileDrop(reader.result, file);
-      console.log("Store: ", this.props.store.getState());
-      this.setState({ //HANDLE_FILE_DROP
-        imageUrl: reader.result,
-        file: file,
-        displaying: true,
-      });
     }
   }
 
   onCropChange(crop) {
     this.props.onCropChange(crop);
     console.log("Store:", this.props.store.getState());
-    // this.setState({
-    //   crop: crop
-    // });
   }
 
   /**
@@ -78,18 +68,10 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
     console.log("pixelcrop", pixelcrop);
     const croppedImage = this.getCroppedImg(this.props.store.getState().imageUrl, pixelcrop, "outputImage");
     this.props.setCroppedImage(croppedImage);
-    // this.setState({
-    //   croppedImage: croppedImage,
-    //   tessFinish: false,
-    // });
     Tesseract.recognize(croppedImage)
       .then((result) => {
         console.log(result.text);
         this.props.onCropComplete(result.text);
-        // this.setState({
-        //   outputText: result.text,
-        //   tessFinish: true
-        // });
       });
   }
 
