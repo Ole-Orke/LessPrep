@@ -4417,6 +4417,10 @@ load-json-file@^4.0.0:
     pify "^3.0.0"
     strip-bom "^3.0.0"
 
+load-script@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/load-script/-/load-script-1.0.0.tgz#0491939e0bee5643ee494a7e3da3d2bac70c6ca4"
+
 loader-fs-cache@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/loader-fs-cache/-/loader-fs-cache-1.0.1.tgz#56e0bf08bd9708b26a765b68509840c8dec9fdbc"
@@ -5984,9 +5988,19 @@ react-file-drop@^0.2.6:
   dependencies:
     prop-types "^15.6.1"
 
+react-google-picker@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/react-google-picker/-/react-google-picker-0.0.8.tgz#4b176f5c04bb4245f7a5c87c21140cc2cc09cdea"
+  dependencies:
+    load-script "^1.0.0"
+
 react-image-crop@^4.0.2:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/react-image-crop/-/react-image-crop-4.0.3.tgz#3625ebd22a2c8c870ce2fe338a91e9181e68b9bc"
+
+react-load-script@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/react-load-script/-/react-load-script-0.0.6.tgz#db6851236aaa25bb622677a2eb51dad4f8d2c258"
 
 react-redux@^5.0.7:
   version "5.0.7"

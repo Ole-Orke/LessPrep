@@ -5,7 +5,6 @@ import App from './App';
 
 const documentDefaultState = {
   imageUrl: "",
-  file: "",
   displaying: false,
   crop: {
     x: 0,
@@ -25,7 +24,6 @@ const reducer = (state = documentDefaultState, action) => {
       return {
         ...state,
         imageUrl: action.data.result,
-        file: action.data.file,
         displaying: true,
       }
     case "ON_CROP_CHANGE":

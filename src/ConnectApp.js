@@ -4,7 +4,6 @@ import App from "./App.js";
 const mapStateToProps = (state) => {
   return {
     imageUrl: state.imageUrl,
-    file: state.file,
     displaying: state.displaying,
     crop: state.crop,
     croppedImage: state.croppedImage,
@@ -15,12 +14,11 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  handleFileDrop: (result, file) => {
+  handleFileDrop: (result) => {
     dispatch({
       type: "HANDLE_FILE_DROP",
       data: {
         result: result,
-        file: file,
       }
     });
   },
