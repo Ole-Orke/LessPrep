@@ -67,34 +67,36 @@ class App extends Component {
     console.log(this.state.sessionStarted);
     return (
       <div className="Window">
-        <div className="App">
-          <header className="App-header">
-            {this.state.sessionStarted ? <span><h1 className="App-title">LessPrep</h1><span style={{position: "absolute", top: "5px", right: "10px"}}><button className="btn btn-primary" onClick={() => this.logout()}>Logout</button></span></span> : <div><h1 className="App-title">LessPrep</h1></div>}
-          </header>
-        </div>
-        {this.state.sessionStarted ? <div>
-          <div className="workspace-container">
-            <DocumentDisplay
-              handleFileDrop={(result, file) => this.props.handleFileDrop(result, file)}
-              onCropChange={(crop) => this.props.onCropChange(crop)}
-              onCropComplete={(text) => this.props.onCropComplete(text)}
+
+        {this.state.sessionStarted ?
+          <div>
+            <div className="App">
+              <header className="App-header">
+                {this.state.sessionStarted ? <span><h1 className="App-title">LessPrep</h1><span style={{position: "absolute", top: "5px", right: "10px"}}><button className="btn btn-primary" onClick={() => this.logout()}>Logout</button></span></span> : <div><h1 className="App-title">LessPrep</h1></div>}
+              </header>
+            </div>
+            <div className="workspace-container">
+              <DocumentDisplay
+                handleFileDrop={(result, file) => this.props.handleFileDrop(result, file)}
+                onCropChange={(crop) => this.props.onCropChange(crop)}
+                onCropComplete={(text) => this.props.onCropComplete(text)}
+                store={this.props.store}
+                setCroppedImage={(croppedImage) => this.props.setCroppedImage(croppedImage)}
+                send={(output) => this.sendOutputText(output)}
+              />
+              <ContentTable  send={(output) => this.sendTable(output)}/>
+            </div>
+            <ExportBar
               store={this.props.store}
-              setCroppedImage={(croppedImage) => this.props.setCroppedImage(croppedImage)}
-              send={(output) => this.sendOutputText(output)}
+              outputText={this.state.outputText} table={this.state.tableData}
+              reset={() => this.props.reset()}
             />
-            <ContentTable  send={(output) => this.sendTable(output)}/>
           </div>
-          <ExportBar
-            store={this.props.store}
-            outputText={this.state.outputText} table={this.state.tableData}
-            reset={() => this.props.reset()}
-          />
-        </div>
-        :
-        <div>
-          <LandingPage continueOffline={() => this.continueOffline()} login={() => this.login()} />
-        </div>
-      }
+          :
+          <div>
+            <LandingPage continueOffline={() => this.continueOffline()} login={() => this.login()} />
+          </div>
+        }
 
       </div>
     );
