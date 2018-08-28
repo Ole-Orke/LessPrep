@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import FileDrop from "react-file-drop";
 import ReactCrop from "react-image-crop";
 import 'react-image-crop/dist/ReactCrop.css';
+import { Button } from "semantic-ui-react";
+import Script from "react-load-script";
+import GooglePicker from "react-google-picker";
 
 const Tesseract = window.Tesseract;
 
@@ -10,15 +13,17 @@ class DocumentDisplay extends Component {
     super(props);
   }
 
+  componentDidMount() {
+  }
+
   handleDrop(files, event) {
     let reader = new FileReader();
     let file = files[0];
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      console.log(file);
       let image = new Image();
       image.src = reader.result;
-      this.props.handleFileDrop(reader.result, file);
+      this.props.handleFileDrop(reader.result);
     }
   }
 
@@ -75,6 +80,17 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
       });
   }
 
+  handleScriptLoad = () => {
+    console.log("Script loaded!");
+  }
+
+  handleGoogleDriveChange(data) {
+    if (data.action === "picked") {
+      console.log("url:", data.docs[0].url);
+      this.props.handleFileDrop(data.docs[0].url);
+    }
+  }
+
   render() {
     const documentStyle = {
       height: "88vh",
@@ -92,6 +108,10 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
     }
     return (
       <div style={documentStyle}>
+    {/*    <Script
+          url="https://apis.google.com/js/api.js?onload=onApiLoad"
+          onLoad={() => this.handleScriptLoad()}
+        />*/}
         {this.props.store.getState().displaying ?
           <div>
             <ReactCrop
@@ -103,7 +123,20 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
             />
           </div>
             :
-            <FileDrop style={fileDropStyle} id="croppedImage" onDrop={(files, event) => this.handleDrop(files, event)}>Drop an image here!</FileDrop>}
+            <FileDrop style={fileDropStyle} id="croppedImage" onDrop={(files, event) => this.handleDrop(files, event)}>Drop an image here, or upload from: <GooglePicker
+              clientId={process.env.REACT_APP_CLIENT_ID}
+                  developerKey={process.env.REACT_APP_DEVELOPER_KEY}
+                  scope={['https://www.googleapis.com/auth/photos']}
+                  onChange={(data) => this.handleGoogleDriveChange(data)}
+                  onAuthenticate={token => console.log('oauth token:', token)}
+                  multiselect={false}
+                  navHidden={true}
+                  authImmediate={true}
+                  mimeTypes={['image/png', 'image/jpeg', 'image/jpg']}
+                  viewId={'PHOTOS'}
+              >
+              <Button>Google Drive</Button>
+            </GooglePicker></FileDrop>}
       </div>
     )
   }
