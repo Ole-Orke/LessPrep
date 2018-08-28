@@ -67,7 +67,7 @@ app.get('/ping', function (req, res) {
 // DO NOT REMOVE THIS LINE :)
 //CHANGE TO BUILD WHEN RELEASING
 app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.post("/api/user/register", (req, res) => {

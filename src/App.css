@@ -124,3 +124,26 @@ div {
 .cell {
   word-break: break-all;
 }
+
+#landing-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /* position: fixed; */
+  width:100%;
+}
+
+#nav-buttons {
+  margin: 0;
+  display: flex;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-text {
+  display: flex;
+}
