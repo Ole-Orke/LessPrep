@@ -21,20 +21,28 @@ class LandingPage extends Component {
   }
 
   goToLogin() {
-    let dispReg = this.state.displayRegistration;
+    // let dispReg = this.state.displayRegistration;
     this.setState({
-      displayRegistration: !dispReg,
+      displayRegistration: true,
       registering: false
     });
+    console.log(this.state)
   }
 
   goToRegistration() {
     console.log("go to registration")
     let dispReg = this.state.displayRegistration;
     this.setState({
-      displayRegistration: !dispReg,
+      displayRegistration: true,
       registering: true
     });
+    console.log(this.state);
+  }
+
+  toLandingPage() {
+    this.setState({
+      displayRegistration: false
+    })
   }
 
   exampleRolesLooper() {
@@ -50,7 +58,7 @@ class LandingPage extends Component {
     return (
       <div className="landing-page">
           <Segment clearing id="landing-header">
-            <Header className="header-text" floated="left" >
+            <Header as="a" className="header-text" floated="left" onClick={()=>this.toLandingPage()} href="#">
               LessPrep
             </Header>
             <Header id="nav-buttons" floated="right">
@@ -61,31 +69,35 @@ class LandingPage extends Component {
               </Button.Group>
             </Header>
           </Segment>
-
-          <Container className="rotating-roles" as="h1" textAlign="center">Are you a {this.state.exampleRoles[this.state.rolesIndex]}?</Container>
-
-          <Container className="landing-page-description">
-            <Container as="h2" textAlign="center">Stop redoing your lesson plans</Container>
-            <p>We hate redundancy. We know you do too. LessPrep is here to take the repetition out of lesson planning.
-              Never re-write another worksheet, study guide or lesson plan again. Simply upload a picture, select the
-              text you need, and output it to a variety of formats. Simple as that.</p>
-          </Container>
-          <Container as="h2" textAlign="center">How it works:</Container>
-          <div className="how-it-works">
-            <Step.Group size="huge" fluid="true">
-              <Step icon="file" title="Insert Document" description="yatta yatta yatta...">
-              </Step>
-              <Step icon="edit" title="Edit Table" description="some more info"></Step>
-              <Step icon="download" title="Output!" description="Flashcards, worksheets and more!"></Step>
-            </Step.Group>
-            <Container as="h2" textAlign="center">Interested? Then {<a href='#' onClick={()=>this.goToRegistration()}>sign up now!</a>}</Container>
-          </div>
-          {this.state.displayRegistration ?
+              {this.state.displayRegistration ?
+                <div>
+                {this.state.registering ? <Registration continueOffline={() => this.props.continueOffline()}  goToLogin={() => this.goToLogin()}/> : <Login login={() => this.props.login()} goToRegistration={() => this.goToRegistration()} />}
+            </div>
+            :
             <div>
-            {this.state.registering ? <Registration continueOffline={() => this.props.continueOffline()}  goToLogin={() => this.goToLogin()}/> : <Login login={() => this.props.login()} goToRegistration={() => this.goToRegistration()} />}
-          </div> :
-          <div></div>
-         }
+              <Container className="rotating-roles" as="h1" textAlign="center">Are you a {this.state.exampleRoles[this.state.rolesIndex]}?</Container>
+
+              <Container className="landing-page-description">
+                <Container as="h2" textAlign="center">Stop redoing your lesson plans</Container>
+                <p>We hate redundancy. We know you do too. LessPrep is here to take the repetition out of lesson planning.
+                  Never re-write another worksheet, study guide or lesson plan again. Simply upload a picture, select the
+                  text you need, and output it to a variety of formats. Simple as that.</p>
+              </Container>
+              <Container as="h2" textAlign="center">How it works:</Container>
+              <div className="how-it-works">
+                <Step.Group size="small" fluid widths={4}>
+                  <Step icon="file outline" title="Add Document"></Step>
+                  <Step icon="crop" title="Select text"></Step>
+                  <Step icon="edit" title="Insert / Edit Text in Table"></Step>
+                  <Step icon="download" title="Output!" description="Flashcards, worksheets and more!"></Step>
+                </Step.Group>
+                <Container as="h2" textAlign="center">Interested? Then {<a href='#' onClick={()=>this.goToRegistration()}>sign up now!</a>}</Container>
+            </div>
+            </div>
+        }
+
+
+
       </div>
     )
   }

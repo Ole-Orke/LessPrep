@@ -126,12 +126,12 @@ div {
 }
 
 .landing-page {
-  background-color: #006274;
+  background-color: #ffff;
   height: 100vh;
 }
 
 #landing-header {
-  background-color: #007990;
+  background-color: #f2f2f2;
 }
 
 #landing-header > .header-text {
@@ -140,6 +140,7 @@ div {
 
 #nav-buttons {
   margin: 0;
+  margin-top:1.25%;
   display: flex;
 }
 
@@ -159,6 +160,8 @@ div {
 .landing-page-description {
   border: solid rgba(34,36,38,0.15) 1px;
   border-radius: 5px;
+  background-color: #f2f2f2;
+  padding-bottom: 2%;
 }
 
 .landing-page-description > h2 {
@@ -168,6 +171,7 @@ div {
 
 .landing-page-description > p {
   font-size: 1.5em;
+
 }
 
 .how-it-works {

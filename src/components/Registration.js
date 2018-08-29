@@ -57,14 +57,14 @@ class Registration extends Component {
 
   render() {
     const formContainer = {
-      marginTop: "10%",
+      marginTop: "5%",
       marginRight: "30%",
       marginLeft: "30%",
       paddingTop: "2%",
       paddingLeft: "3%",
       paddingRight: "3%",
       paddingBottom: "3%",
-      backgroundColor: "#e0ebff",
+      backgroundColor: "#f2f2f2",
       borderRadius: "5px",
     }
     return (
@@ -84,7 +84,7 @@ class Registration extends Component {
             <label>Password</label>
             <input type="password" className="form-control" onChange={(event) => this.onPasswordChange(event)} value={this.state.password} placeholder="Password" required/>
           </div>
-          <div style={{display: "flex", justifyContent: "space-around"}}>
+          <div style={{display: "inline-block"}}>
             <button onClick={() => this.register()} className="btn btn-light">
               Register
             </button>
