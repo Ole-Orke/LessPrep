@@ -12,7 +12,7 @@ class ContentTable extends Component {
   }
 
   componentDidMount(){
-  };
+  }
 
   keyPress(event){
     if (event.keyCode === 13) {

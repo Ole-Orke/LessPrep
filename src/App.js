@@ -3,6 +3,7 @@ import ContentTable from "./components/ContentTable.js";
 import DocumentDisplay from "./components/DocumentDisplay.js";
 import ExportBar from "./components/ExportBar.js";
 import LandingPage from "./components/LandingPage.js";
+import { Header, Segment, Button } from "semantic-ui-react";
 import './App.css';
 
 class App extends Component {
@@ -71,9 +72,9 @@ class App extends Component {
         {this.state.sessionStarted ?
           <div>
             <div className="App">
-              <header className="App-header">
-                {this.state.sessionStarted ? <span><h1 className="App-title">LessPrep</h1><span style={{position: "absolute", top: "5px", right: "10px"}}><button className="btn btn-primary" onClick={() => this.logout()}>Logout</button></span></span> : <div><h1 className="App-title">LessPrep</h1></div>}
-              </header>
+              <Segment clearing>
+                {this.state.sessionStarted ? <span><Header floated="left" className="App-title">LessPrep</Header><span style={{position: "absolute", top: "5px", right: "10px"}}><Button className="btn btn-primary" onClick={() => this.logout()}>Logout</Button></span></span> : <div><h1 className="App-title">LessPrep</h1></div>}
+              </Segment>
             </div>
             <div className="workspace-container">
               <DocumentDisplay

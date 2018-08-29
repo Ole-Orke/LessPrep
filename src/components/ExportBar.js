@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import jsPdf from 'jspdf';
+import {Button, Segment} from "semantic-ui-react";
 
 class ExportBar extends Component {
   constructor(props){
@@ -93,7 +94,7 @@ class ExportBar extends Component {
   render() {
     // console.log("export props", this.props);
     const exportStyle = {
-      background: "linear-gradient(#a0c3ff, #6AA1FF)",
+      background: "white",
       height: "6%",
       display: "flex",
       justifyContent: "space-around",
@@ -101,6 +102,7 @@ class ExportBar extends Component {
       bottom: "0",
       right: "0",
       width: "100vw",
+      border: "2px solid #e0e0e0"
     }
     const exportElementStyle = {
       padding: "10px",
@@ -126,17 +128,20 @@ class ExportBar extends Component {
     return (
       <div style={exportStyle}>
         <div style={exportElementStyle}>
-          <button onClick={() => this.props.reset()} className="btn btn-primary">Reset</button>
+          <Button onClick={() => this.props.reset()} className="btn btn-primary">Reset</Button>
         </div>
         <div style={exportElementStyle}>
           <CopyToClipboard text={this.props.store.getState().outputText}
             onCopy={() => {console.log("copied!")}}>
-            <button className="btn btn-primary">Copy to clipboard</button>
+            <Button className="btn btn-primary">Copy to clipboard</Button>
           </CopyToClipboard>
         </div>
         <div style={exportElementStyle}>
-          <button onClick={() => this.reveal()} className="btn btn-primary">Export</button>
-          <button onClick={()=> this.toFlashcard()} style={this.state.revealExportOptions ? exportOptionsOn : exportOptionsOff} className="btn export-to-flashcard">to Flashcards</button>
+          <Button>Save</Button>
+        </div>
+        <div style={exportElementStyle}>
+          <Button onClick={() => this.reveal()} className="btn btn-primary">Export</Button>
+          <Button onClick={()=> this.toFlashcard()} style={this.state.revealExportOptions ? exportOptionsOn : exportOptionsOff} className="btn export-to-flashcard">to Flashcards</Button>
         </div>
       </div>
     )

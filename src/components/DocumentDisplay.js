@@ -6,6 +6,7 @@ import { Button } from "semantic-ui-react";
 import Script from "react-load-script";
 import GooglePicker from "react-google-picker";
 import axios from "axios";
+import {developerKey, clientId} from "./config.js";
 
 const Tesseract = window.Tesseract;
 
@@ -99,20 +100,21 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
   handleGoogleDriveChange(data) {
     if (data.action === "picked") {
       console.log("data:", data);
-      // axios({
-      //   url: "https://www.googleapis.com/drive/v3/files/" + data.docs[0].id + "?alt=media",
-      //   method: "GET",
-      //   headers: {
-      //     Authorization: "Bearer " + this.state.token,
-      //   }
-      // })
-      // .then((res) => res.json())
-      // .then((resJson) => {
-      //   console.log("Response:", resJson);
-      // })
-      // .catch((err) => {
-      //   console.log(err);
-      // })
+      console.log("this:", this);
+      console.log("Token:", this.state.token);
+      axios({
+        url: "https://www.googleapis.com/drive/v3/files/" /*+ data.docs[0].id + "?alt=media"*/,
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + this.state.token,
+        }
+      })
+      .then((resJson) => {
+        console.log("Response:", resJson);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
       this.props.handleFileDrop(data.docs[0].url);
     }
   }
@@ -152,7 +154,7 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
             <FileDrop style={fileDropStyle} id="croppedImage" onDrop={(files, event) => this.handleDrop(files, event)}>Drop an image here, or upload from: <GooglePicker
               clientId={process.env.REACT_APP_CLIENT_ID}
                   developerKey={process.env.REACT_APP_DEVELOPER_KEY}
-                  scope={['https://www.googleapis.com/auth/photos']}
+                  scope={['https://www.googleapis.com/auth/drive.readonly']}
                   onChange={(data) => this.handleGoogleDriveChange(data)}
                   onAuthenticate={token => this.handleAuth(token)}
                   multiselect={false}
