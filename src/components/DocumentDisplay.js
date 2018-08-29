@@ -5,12 +5,16 @@ import 'react-image-crop/dist/ReactCrop.css';
 import { Button } from "semantic-ui-react";
 import Script from "react-load-script";
 import GooglePicker from "react-google-picker";
+import axios from "axios";
 
 const Tesseract = window.Tesseract;
 
 class DocumentDisplay extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      token: ""
+    }
   }
 
   componentDidMount() {
@@ -84,9 +88,31 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
     console.log("Script loaded!");
   }
 
+  handleAuth(token) {
+    this.setState({
+      token: token
+    }, () => {
+      console.log("Token set:", token);
+    });
+  }
+
   handleGoogleDriveChange(data) {
     if (data.action === "picked") {
-      console.log("url:", data.docs[0].url);
+      console.log("data:", data);
+      // axios({
+      //   url: "https://www.googleapis.com/drive/v3/files/" + data.docs[0].id + "?alt=media",
+      //   method: "GET",
+      //   headers: {
+      //     Authorization: "Bearer " + this.state.token,
+      //   }
+      // })
+      // .then((res) => res.json())
+      // .then((resJson) => {
+      //   console.log("Response:", resJson);
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      // })
       this.props.handleFileDrop(data.docs[0].url);
     }
   }
@@ -128,7 +154,7 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
                   developerKey={process.env.REACT_APP_DEVELOPER_KEY}
                   scope={['https://www.googleapis.com/auth/photos']}
                   onChange={(data) => this.handleGoogleDriveChange(data)}
-                  onAuthenticate={token => console.log('oauth token:', token)}
+                  onAuthenticate={token => this.handleAuth(token)}
                   multiselect={false}
                   navHidden={true}
                   authImmediate={true}
