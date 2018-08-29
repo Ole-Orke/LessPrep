@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'semantic-ui-react'
 
 class Login extends Component {
   constructor(props){
@@ -54,14 +55,14 @@ class Login extends Component {
 
   render() {
     const formContainer = {
-      marginTop: "10%",
+      marginTop: "5%",
       marginRight: "30%",
       marginLeft: "30%",
       paddingTop: "2%",
       paddingLeft: "3%",
       paddingRight: "3%",
       paddingBottom: "3%",
-      backgroundColor: "#e0ebff",
+      backgroundColor: "#f2f2f2",
       borderRadius: "5px",
     }
     return (

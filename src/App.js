@@ -13,7 +13,7 @@ class App extends Component {
       outputText: "",
       tableData: [],
       sessionStarted: false,
-      loggedIn: false
+      loggedIn: false,
     }
   }
 
@@ -93,9 +93,9 @@ class App extends Component {
             />
           </div>
           :
-          <div>
-            <LandingPage continueOffline={() => this.continueOffline()} login={() => this.login()} />
-          </div>
+            <div>
+              <LandingPage continueOffline={() => this.continueOffline()} login={() => this.login()} />
+            </div>
         }
 
       </div>
