@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button, Responsive, Container, Grid } from 'semantic-ui-react';
 
 class Registration extends Component {
   constructor(props) {
@@ -58,18 +59,16 @@ class Registration extends Component {
   render() {
     const formContainer = {
       marginTop: "5%",
-      marginRight: "30%",
-      marginLeft: "30%",
+      marginRight: "10%",
+      marginLeft: "10%",
       paddingTop: "2%",
       paddingLeft: "3%",
       paddingRight: "3%",
       paddingBottom: "3%",
-      backgroundColor: "#f2f2f2",
-      borderRadius: "5px",
     }
     return (
-      <div className="container-fluid">
-        <div style={formContainer}>
+      <div className="container">
+        {/* <Responsive as="div" maxWidth={670}>
           <div style={{textAlign: "center"}}>
             <h3>
               Register
@@ -84,18 +83,62 @@ class Registration extends Component {
             <label>Password</label>
             <input type="password" className="form-control" onChange={(event) => this.onPasswordChange(event)} value={this.state.password} placeholder="Password" required/>
           </div>
-          <div style={{display: "inline-block"}}>
-            <button onClick={() => this.register()} className="btn btn-light">
+          <Responsive as={Button.Group} fluid widths={3} >
+            <Button onClick={() => this.register()} className="btn btn-light">
               Register
-            </button>
-            <button onClick={() => this.props.continueOffline()} className="btn btn-light">
+            </Button>
+            <Button onClick={() => this.props.continueOffline()} className="btn btn-light">
               Continue Offline
-            </button>
-            <button onClick={() => this.props.goToLogin()} className="btn btn-light">
+            </Button>
+            <Button onClick={() => this.props.goToLogin()} className="btn btn-light">
               Go to login
-            </button>
+            </Button>
+          </Responsive>
+        </Responsive> */}
+
+        <Responsive as="div" style={formContainer}>
+          <div style={{textAlign: "center"}}>
+            <h3>
+              Register
+            </h3>
           </div>
-        </div>
+          <div className="form-group">
+            <label>Email address</label>
+            <input type="email" className="form-control" onChange={(event) => this.onEmailChange(event)} value={this.state.email} placeholder="Enter email" required/>
+            <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div className="form-group">
+            <label>Password</label>
+            <input type="password" className="form-control" onChange={(event) => this.onPasswordChange(event)} value={this.state.password} placeholder="Password" required/>
+          </div>
+          {/* <Responsive as={Button.Group} fluid widths={3} minWidth={723}> */}
+          <Responsive as={Button.Group} fluid widths={3} minWidth={548}>
+            <Button onClick={() => this.register()} className="btn btn-light">
+              Register
+            </Button>
+            <Button onClick={() => this.props.continueOffline()} className="btn btn-light">
+              Continue Offline
+            </Button>
+            <Button onClick={() => this.props.goToLogin()} className="btn btn-light">
+              To Login
+            </Button>
+          </Responsive>
+
+          <Responsive as={Grid}  maxWidth={547} centered>
+            <Grid.Column as={Button.Group} vertical size='small'>
+              <Button onClick={() => this.register()} className="btn btn-light" >
+                Register
+              </Button>
+              <Button onClick={() => this.props.continueOffline()} className="btn btn-light">
+                Continue Offline
+              </Button>
+              <Button onClick={() => this.props.goToLogin()} className="btn btn-light">
+                To Login
+              </Button>
+            </Grid.Column>
+          </Responsive>
+        </Responsive>
+
       </div>
     )
   }

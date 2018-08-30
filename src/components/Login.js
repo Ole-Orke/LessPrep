@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'semantic-ui-react'
+import { Button, Responsive, Grid } from 'semantic-ui-react'
 
 class Login extends Component {
   constructor(props){
@@ -56,17 +56,15 @@ class Login extends Component {
   render() {
     const formContainer = {
       marginTop: "5%",
-      marginRight: "30%",
-      marginLeft: "30%",
+      marginRight: "20%",
+      marginLeft: "20%",
       paddingTop: "2%",
       paddingLeft: "3%",
       paddingRight: "3%",
       paddingBottom: "3%",
-      backgroundColor: "#f2f2f2",
-      borderRadius: "5px",
     }
     return (
-      <div className="container-fluid">
+      <Responsive as='div' className="container">
         <div style={formContainer}>
           <div style={{textAlign: "center"}}>
             <h3>
@@ -81,16 +79,28 @@ class Login extends Component {
             <label>Password</label>
             <input type="password" className="form-control" onChange={(event) => this.onPasswordChange(event)} value={this.state.password} placeholder="Password" />
           </div>
-          <div style={{display: "flex", justifyContent: "space-around"}}>
-            <button onClick={() => this.login()} className="btn btn-light">
+          <Responsive as={Button.Group} fluid widths={2} minWidth={548}>
+            <Button onClick={() => this.login()} className="btn btn-light">
               Login
-            </button>
-            <button onClick={() => this.props.goToRegistration()} className="btn btn-light">
-              Go to registration
-            </button>
-          </div>
+            </Button>
+            <Button onClick={() => this.props.goToRegistration()} className="btn btn-light">
+              To Registration
+            </Button>
+          </Responsive>
+
+          <Responsive as={Grid}  maxWidth={547} centered>
+            <Grid.Column as={Button.Group} vertical size='small'>
+              <Button onClick={() => this.register()} className="btn btn-light" >
+                Register
+              </Button>
+              <Button onClick={() => this.props.continueOffline()} className="btn btn-light">
+                Continue Offline
+              </Button>
+            </Grid.Column>
+          </Responsive>
+
         </div>
-      </div>
+      </Responsive>
     )
   }
 }
