@@ -3,7 +3,7 @@ import ContentTable from "./components/ContentTable.js";
 import DocumentDisplay from "./components/DocumentDisplay.js";
 import ExportBar from "./components/ExportBar.js";
 import LandingPage from "./components/LandingPage.js";
-import { Header, Segment, Button } from "semantic-ui-react";
+import { Header, Segment, Button, Dropdown } from "semantic-ui-react";
 import './App.css';
 
 class App extends Component {
@@ -67,7 +67,7 @@ class App extends Component {
   render() {
     const headerStyle = {
       height: "3%",
-      backgroundColor: "#f2f2f2"
+      backgroundColor: "#f2f2f2",
     }
     console.log(this.state.sessionStarted);
     return (
@@ -77,7 +77,23 @@ class App extends Component {
           <div>
             <div className="App">
               <Segment style={headerStyle} clearing>
-                {this.state.sessionStarted ? <span><Header floated="left" className="App-title">LessPrep</Header><Button floated="right" onClick={() => this.logout()}>Logout</Button></span> : <div><h1 className="App-title">LessPrep</h1></div>}
+                <Dropdown style={{fontSize: "2.5em"}} icon="align justify">
+                  <Dropdown.Menu>
+                    <Dropdown.Item text='New' />
+                    <Dropdown.Item text='Open...' description='ctrl + o' />
+                    <Dropdown.Item text='Save as...' description='ctrl + s' />
+                    <Dropdown.Item text='Rename' description='ctrl + r' />
+                    <Dropdown.Item text='Make a copy' />
+                    <Dropdown.Item icon='folder' text='Move to folder' />
+                    <Dropdown.Item icon='trash' text='Move to trash' />
+                    <Dropdown.Divider />
+                    <Dropdown.Item text='Download As...' />
+                    <Dropdown.Item text='Publish To Web' />
+                    <Dropdown.Item text='E-mail Collaborators' />
+                  </Dropdown.Menu>
+                </Dropdown>
+                <Header style={{fontSize: "2.5em"}} floated="left" className="App-title">LessPrep</Header>
+                <Button floated="right" onClick={() => this.logout()}>Logout</Button>
               </Segment>
             </div>
             <div className="workspace-container">
