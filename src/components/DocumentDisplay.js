@@ -6,7 +6,6 @@ import { Button } from "semantic-ui-react";
 import Script from "react-load-script";
 import GooglePicker from "react-google-picker";
 import axios from "axios";
-import {developerKey, clientId} from "./config.js";
 
 const Tesseract = window.Tesseract;
 

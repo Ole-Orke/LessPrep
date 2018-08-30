@@ -3,7 +3,7 @@ import ContentTable from "./components/ContentTable.js";
 import DocumentDisplay from "./components/DocumentDisplay.js";
 import ExportBar from "./components/ExportBar.js";
 import LandingPage from "./components/LandingPage.js";
-import { Header, Segment, Button, Dropdown } from "semantic-ui-react";
+import { Header, Segment, Button, Dropdown, Grid } from "semantic-ui-react";
 import './App.css';
 
 class App extends Component {
@@ -68,6 +68,8 @@ class App extends Component {
     const headerStyle = {
       height: "3%",
       backgroundColor: "#f2f2f2",
+      margin: "0",
+      padding: '0',
     }
     console.log(this.state.sessionStarted);
     return (
@@ -75,27 +77,68 @@ class App extends Component {
 
         {this.state.sessionStarted ?
           <div>
-            <div className="App">
-              <Segment style={headerStyle} clearing>
-                <Dropdown style={{fontSize: "2.5em"}} icon="align justify">
-                  <Dropdown.Menu>
-                    <Dropdown.Item text='New' />
-                    <Dropdown.Item text='Open...' description='ctrl + o' />
-                    <Dropdown.Item text='Save as...' description='ctrl + s' />
-                    <Dropdown.Item text='Rename' description='ctrl + r' />
-                    <Dropdown.Item text='Make a copy' />
-                    <Dropdown.Item icon='folder' text='Move to folder' />
-                    <Dropdown.Item icon='trash' text='Move to trash' />
-                    <Dropdown.Divider />
-                    <Dropdown.Item text='Download As...' />
-                    <Dropdown.Item text='Publish To Web' />
-                    <Dropdown.Item text='E-mail Collaborators' />
-                  </Dropdown.Menu>
-                </Dropdown>
-                <Header style={{fontSize: "2.5em"}} floated="left" className="App-title">LessPrep</Header>
-                <Button floated="right" onClick={() => this.logout()}>Logout</Button>
-              </Segment>
-            </div>
+            {/* <Grid className="App" style={{margin: 0}}>
+              <Grid.Column style={headerStyle} clearing>
+                <Segment as={Segment.Group} compact horizontal floated="left" basic>
+
+                  <Header style={{margin: 0, padding: 0, fontSize: "2.5em"}} className="App-title">
+                    LessPrep
+                  </Header>
+                  <Dropdown style={{fontSize: "2.5em"}} icon="align justify">
+                    <Dropdown.Menu>
+                      <Dropdown.Item text='New' />
+                      <Dropdown.Item text='Open...' description='ctrl + o' />
+                      <Dropdown.Item text='Save as...' description='ctrl + s' />
+                      <Dropdown.Item text='Rename' description='ctrl + r' />
+                      <Dropdown.Item text='Make a copy' />
+                      <Dropdown.Item icon='folder' text='Move to folder' />
+                      <Dropdown.Item icon='trash' text='Move to trash' />
+                      <Dropdown.Divider />
+                      <Dropdown.Item text='Download As...' />
+                      <Dropdown.Item text='Publish To Web' />
+                      <Dropdown.Item text='E-mail Collaborators' />
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Segment>
+                <Grid.Column as={Button} floated="right" onClick={() => this.logout()}>Logout</Grid.Column>
+              </Grid.Column>
+            </Grid> */}
+            <Segment style={{padding: 0, margin: 0}}>
+              <Grid className="App" style={{margin: 0}} verticalAlign="bottom">
+                <Grid.Row>
+                  <Grid.Column width={2}>
+
+                      <Header style={{fontSize: "2.5em"}} className="App-title">
+                        LessPrep
+                      </Header>
+                    </Grid.Column>
+                    <Grid.Column width={1}>
+                      <Dropdown style={{fontSize: "2.5em"}} icon="align justify">
+                        <Dropdown.Menu>
+                          <Dropdown.Item text='New' />
+                          <Dropdown.Item text='Open...' description='ctrl + o' />
+                          <Dropdown.Item text='Save as...' description='ctrl + s' />
+                          <Dropdown.Item text='Rename' description='ctrl + r' />
+                          <Dropdown.Item text='Make a copy' />
+                          <Dropdown.Item icon='folder' text='Move to folder' />
+                          <Dropdown.Item icon='trash' text='Move to trash' />
+                          <Dropdown.Divider />
+                          <Dropdown.Item text='Download As...' />
+                          <Dropdown.Item text='Publish To Web' />
+                          <Dropdown.Item text='E-mail Collaborators' />
+                        </Dropdown.Menu>
+                      </Dropdown>
+                  </Grid.Column>
+                  {/* <Grid.Column as={Button} floated="right" onClick={() => this.logout()} width={1} centered>
+                    Logout
+                  </Grid.Column> */}
+                  <Button as={Grid.Column} floated="right" onClick={() => this.logout()} width={1}>
+                    Logout
+                  </Button>
+                </Grid.Row>
+              </Grid>
+            </Segment>
+
             <div className="workspace-container">
               <DocumentDisplay
                 handleFileDrop={(result, file) => this.props.handleFileDrop(result, file)}
@@ -105,7 +148,7 @@ class App extends Component {
                 setCroppedImage={(croppedImage) => this.props.setCroppedImage(croppedImage)}
                 send={(output) => this.sendOutputText(output)}
               />
-              <ContentTable  send={(output) => this.sendTable(output)}/>
+              <ContentTable style={{margin: "50px"}} send={(output) => this.sendTable(output)}/>
             </div>
             <ExportBar
               store={this.props.store}
