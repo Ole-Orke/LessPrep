@@ -65,6 +65,10 @@ class App extends Component {
   }
 
   render() {
+    const headerStyle = {
+      height: "3%",
+      backgroundColor: "#f2f2f2"
+    }
     console.log(this.state.sessionStarted);
     return (
       <div className="Window">
@@ -72,8 +76,8 @@ class App extends Component {
         {this.state.sessionStarted ?
           <div>
             <div className="App">
-              <Segment clearing>
-                {this.state.sessionStarted ? <span><Header floated="left" className="App-title">LessPrep</Header><span style={{position: "absolute", top: "5px", right: "10px"}}><Button className="btn btn-primary" onClick={() => this.logout()}>Logout</Button></span></span> : <div><h1 className="App-title">LessPrep</h1></div>}
+              <Segment style={headerStyle} clearing>
+                {this.state.sessionStarted ? <span><Header floated="left" className="App-title">LessPrep</Header><Button floated="right" onClick={() => this.logout()}>Logout</Button></span> : <div><h1 className="App-title">LessPrep</h1></div>}
               </Segment>
             </div>
             <div className="workspace-container">

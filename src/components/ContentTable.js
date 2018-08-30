@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Textarea from 'react-textarea-autosize';
+import { Button } from "semantic-ui-react";
 
 class ContentTable extends Component {
   constructor(props) {
@@ -183,7 +184,7 @@ class ContentTable extends Component {
                 onClick={()=>this.setState({isEditing:false})}
               />
             </div>
-            <button type="submit" className="col-sm-12 btn btn-light" onClick={(e)=>this.updateTable(e)}><strong>Add new</strong></button>
+            <Button type="submit" className="col-sm-12 btn btn-light" onClick={(e)=>this.updateTable(e)}><strong>Add new</strong></Button>
           </div>
         </div>
       )

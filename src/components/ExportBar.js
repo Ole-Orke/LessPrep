@@ -94,7 +94,7 @@ class ExportBar extends Component {
   render() {
     // console.log("export props", this.props);
     const exportStyle = {
-      background: "white",
+      background: "#f2f2f2",
       height: "6%",
       display: "flex",
       justifyContent: "space-around",
