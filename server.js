@@ -108,29 +108,6 @@ app.post("/api/user/register", (req, res) => {
   });
 });
 
-app.post('/api/photo', upload.single('photo'), function (req, res, next) {
-  // req.file is the `avatar` file
-  // req.body will hold the text fields, if there were any
-  console.log("req.body:", req.body);
-  console.log("req.file:", req.file);
-  let newUser = new User({
-    email: "test@test.com",
-    password: "test",
-    editingImage: {
-      data: fs.readFileSync(req.file.path),
-      contentType: "image/jpeg",
-    }
-  });
-  newUser.save((err, user) => {
-    if (err) {
-      console.log("Err:", err);
-    }
-    console.log("Saved image to MongoDB!");
-    console.log("User:", user);
-  });
-  res.status(201).send('success');
-});
-
 // app.post("/api/photo/upload", (req, res) => {
 //   const userId = req.body.userId;
 //   const imgPath = fs.readFileSync(req.body.imgPath);
@@ -166,6 +143,31 @@ app.get("/api/user/logout", (req, res) => {
 io.on("connection", (socket) => {
   socket.on("ping", (data) => {
     socket.emit("pong");
+  });
+
+  app.post('/api/photo', upload.single('photo'), function (req, res, next) {
+    // req.file is the `avatar` file
+    // req.body will hold the text fields, if there were any
+    console.log("req.body:", req.body);
+    console.log("req.file:", req.file);
+    console.log("req.user:", req.user);
+    let newUser = new User({
+      email: "test@test.com",
+      password: "test",
+      editingImage: {
+        data: fs.readFileSync(req.file.path),
+        contentType: "image/jpeg",
+      }
+    });
+    newUser.save((err, user) => {
+      if (err) {
+        console.log("Err:", err);
+      }
+      console.log("Saved image to MongoDB!");
+      console.log("User:", user);
+    });
+    socket.emit("image");
+    res.status(201).send('success');
   });
 });
 

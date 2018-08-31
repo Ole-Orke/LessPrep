@@ -29,6 +29,9 @@ class DocumentDisplay extends Component {
     socket.on("pong", () => {
       console.log("Received pong from server");
     });
+    socket.on("image", () => {
+      console.log("Image received!");
+    });
   }
 
   handleDrop(files, event) {
