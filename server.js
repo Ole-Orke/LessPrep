@@ -111,6 +111,21 @@ app.post('/api/photo', upload.single('photo'), function (req, res, next) {
   // req.body will hold the text fields, if there were any
   console.log("req.body:", req.body);
   console.log("req.file:", req.file);
+  let newUser = new User({
+    email: "test@test.com",
+    password: "test",
+    editingImage: {
+      data: fs.readFileSync(req.file.path),
+      contentType: "image/jpeg",
+    }
+  });
+  newUser.save((err, user) => {
+    if (err) {
+      console.log("Err:", err);
+    }
+    console.log("Saved image to MongoDB!");
+    console.log("User:", user);
+  });
   res.status(201).send('success');
 });
 
