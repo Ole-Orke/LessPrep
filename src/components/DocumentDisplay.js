@@ -150,7 +150,7 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
             />
           </div>
             :
-            <FileDrop style={fileDropStyle} id="croppedImage" onDrop={(files, event) => this.handleDrop(files, event)}>Drop an image here, or upload from: <GooglePicker
+            <FileDrop style={fileDropStyle} id="croppedImage" onDrop={(files, event) => this.handleDrop(files, event)}>Drop an image here, or upload from Camera App <GooglePicker
               clientId={process.env.REACT_APP_CLIENT_ID}
                   developerKey={process.env.REACT_APP_DEVELOPER_KEY}
                   scope={['https://www.googleapis.com/auth/drive.readonly']}
@@ -162,7 +162,6 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
                   mimeTypes={['image/png', 'image/jpeg', 'image/jpg']}
                   viewId={'PHOTOS'}
               >
-              <Button>Google Drive</Button>
             </GooglePicker></FileDrop>}
       </div>
     )

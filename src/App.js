@@ -3,7 +3,7 @@ import ContentTable from "./components/ContentTable.js";
 import DocumentDisplay from "./components/DocumentDisplay.js";
 import ExportBar from "./components/ExportBar.js";
 import LandingPage from "./components/LandingPage.js";
-import { Header, Segment, Button, Dropdown, Grid } from "semantic-ui-react";
+import { Image, Header, Segment, Button, Dropdown, Grid, Responsive, Icon } from "semantic-ui-react";
 import './App.css';
 
 class App extends Component {
@@ -103,17 +103,52 @@ class App extends Component {
                 <Grid.Column as={Button} floated="right" onClick={() => this.logout()}>Logout</Grid.Column>
               </Grid.Column>
             </Grid> */}
-            <Segment style={{padding: 0, margin: 0}}>
+            <Responsive as={Segment} style={{padding: 0, margin: 0}} minWidth={1170}>
               <Grid className="App" style={{margin: 0}} verticalAlign="bottom">
                 <Grid.Row>
                   <Grid.Column width={2}>
 
                       <Header style={{fontSize: "2.5em"}} className="App-title">
-                        LessPrep
+                        <Image src={require('/Users/khalidwilliams/LessPrep/src/Images/LessPrep linear drop shadow.png')}></Image>
                       </Header>
                     </Grid.Column>
                     <Grid.Column width={1}>
-                      <Dropdown style={{fontSize: "2.5em"}} icon="align justify">
+                      <Icon as={Dropdown} style={{fontSize: "2em"}} icon="align justify" size='mini'>
+                        <Dropdown.Menu>
+                          <Dropdown.Item text='New' />
+                          <Dropdown.Item text='Open...' description='ctrl + o' />
+                          <Dropdown.Item text='Save as...' description='ctrl + s' />
+                          <Dropdown.Item text='Rename' description='ctrl + r' />
+                          <Dropdown.Item text='Make a copy' />
+                          <Dropdown.Item icon='folder' text='Move to folder' />
+                          <Dropdown.Item icon='trash' text='Move to trash' />
+                          <Dropdown.Divider />
+                          <Dropdown.Item text='Download As...' />
+                          <Dropdown.Item text='Publish To Web' />
+                          <Dropdown.Item text='E-mail Collaborators' />
+                        </Dropdown.Menu>
+                      </Icon>
+                  </Grid.Column>
+                  {/* <Grid.Column as={Button} floated="right" onClick={() => this.logout()} width={1} centered>
+                    Logout
+                  </Grid.Column> */}
+                  <Button as={Grid.Column} floated="right" onClick={() => this.logout()} width={1}>
+                    Logout
+                  </Button>
+                </Grid.Row>
+              </Grid>
+            </Responsive>
+
+            <Responsive as={Segment} style={{padding: 0, margin: 0}} maxWidth={1169}>
+              <Grid className="App" style={{margin: 0}} verticalAlign="bottom">
+                <Grid.Row>
+                  <Grid.Column width={4} style={{display: 'inline'}}>
+
+                      <Header style={{fontSize: "2.5em"}} className="App-title">
+                        <Image src={require('/Users/khalidwilliams/LessPrep/src/Images/LessPrep linear drop shadow.png')}></Image>
+                      </Header>
+
+                      <Dropdown style={{fontSize: "2em"}} icon="align justify">
                         <Dropdown.Menu>
                           <Dropdown.Item text='New' />
                           <Dropdown.Item text='Open...' description='ctrl + o' />
@@ -132,12 +167,12 @@ class App extends Component {
                   {/* <Grid.Column as={Button} floated="right" onClick={() => this.logout()} width={1} centered>
                     Logout
                   </Grid.Column> */}
-                  <Button as={Grid.Column} floated="right" onClick={() => this.logout()} width={1}>
+                  <Button as={Grid.Column} floated="right" onClick={() => this.logout()} width={2}>
                     Logout
                   </Button>
                 </Grid.Row>
               </Grid>
-            </Segment>
+            </Responsive>
 
             <div className="workspace-container">
               <DocumentDisplay
