@@ -52,12 +52,6 @@ app.use(passport.session());
 
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.use(multer({ dest: ‘./uploads/’,
- rename: function (fieldname, filename) {
-   return filename;
- },
-}));
-
 mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true}, (error) => {
   if(error) {
     console.log(error)
