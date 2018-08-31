@@ -109,9 +109,9 @@ app.post("/api/user/register", (req, res) => {
 app.post('/api/photo', upload.single('photo'), function (req, res, next) {
   // req.file is the `avatar` file
   // req.body will hold the text fields, if there were any
-  console.log(req.body)
-  console.log(req.file)
-  res.status(201).send('success')
+  console.log("req.body:", req.body);
+  console.log("req.file:", req.file);
+  res.status(201).send('success');
 });
 
 // app.post("/api/photo/upload", (req, res) => {
