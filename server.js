@@ -7,6 +7,9 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const fs = require("fs");
+const multer = require("multer");
+const upload = multer({ dest: 'uploads/' });
 const saltRounds = 10;
 require('dotenv').config();
 
@@ -48,6 +51,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.static(path.join(__dirname, 'build')));
+
+app.use(multer({ dest: ‘./uploads/’,
+ rename: function (fieldname, filename) {
+   return filename;
+ },
+}));
 
 mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true}, (error) => {
   if(error) {
@@ -102,6 +111,29 @@ app.post("/api/user/register", (req, res) => {
     }
   });
 });
+
+app.post('/api/photo', upload.single('photo'), function (req, res, next) {
+  // req.file is the `avatar` file
+  // req.body will hold the text fields, if there were any
+  console.log(req.body)
+  console.log(req.file)
+  res.status(201).send('success')
+});
+
+// app.post("/api/photo/upload", (req, res) => {
+//   const userId = req.body.userId;
+//   const imgPath = fs.readFileSync(req.body.imgPath);
+//   if (userId) {
+//     User.findOneAndUpdate(userId, {
+//       editingImage.
+//     })
+//   }
+//   else {
+//     res.status(400).json({
+//       error: "Missing userId parameter"
+//     });
+//   }
+// });
 
 app.post("/api/user/login",
   passport.authenticate("local"),
