@@ -28,7 +28,8 @@
     "react-scripts": "1.1.4",
     "react-textarea-autosize": "^7.0.4",
     "redux": "^4.0.0",
-    "semantic-ui-react": "^0.82.3"
+    "semantic-ui-react": "^0.82.3",
+    "socket.io": "^2.1.1"
   },
   "scripts": {
     "start": "node server.js",

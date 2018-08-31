@@ -10,6 +10,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const fs = require("fs");
 const multer = require("multer");
+const io = require("socket.io")(server);
 const upload = multer({ dest: 'uploads/' });
 const saltRounds = 10;
 require('dotenv').config();
@@ -160,6 +161,12 @@ app.get("/api/user/logout", (req, res) => {
   res.json({
     success: true
   });
-})
+});
+
+io.on("connection", (socket) => {
+  socket.on("ping", (data) => {
+    socket.emit("pong");
+  });
+});
 
 server.listen(process.env.PORT || 1337);
