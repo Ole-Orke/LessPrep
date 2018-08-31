@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const path = require('path');
 const app = express();
+const server = require("http").Server(app);
 const User = require("./src/user.js").User;
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
@@ -161,4 +162,4 @@ app.get("/api/user/logout", (req, res) => {
   });
 })
 
-app.listen(process.env.PORT || 1337);
+server.listen(process.env.PORT || 1337);
