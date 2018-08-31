@@ -2,11 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const path = require('path');
 const app = express();
+const server = require("http").Server(app);
 const User = require("./src/user.js").User;
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const fs = require("fs");
+const multer = require("multer");
+const upload = multer({ dest: 'uploads/' });
 const saltRounds = 10;
 require('dotenv').config();
 
@@ -64,6 +68,8 @@ app.get('/ping', function (req, res) {
  return res.send('pong');
 });
 
+//aasd
+
 // DO NOT REMOVE THIS LINE :)
 //CHANGE TO BUILD WHEN RELEASING
 app.get('/', function (req, res) {
@@ -101,6 +107,44 @@ app.post("/api/user/register", (req, res) => {
   });
 });
 
+app.post('/api/photo', upload.single('photo'), function (req, res, next) {
+  // req.file is the `avatar` file
+  // req.body will hold the text fields, if there were any
+  console.log("req.body:", req.body);
+  console.log("req.file:", req.file);
+  let newUser = new User({
+    email: "test@test.com",
+    password: "test",
+    editingImage: {
+      data: fs.readFileSync(req.file.path),
+      contentType: "image/jpeg",
+    }
+  });
+  newUser.save((err, user) => {
+    if (err) {
+      console.log("Err:", err);
+    }
+    console.log("Saved image to MongoDB!");
+    console.log("User:", user);
+  });
+  res.status(201).send('success');
+});
+
+// app.post("/api/photo/upload", (req, res) => {
+//   const userId = req.body.userId;
+//   const imgPath = fs.readFileSync(req.body.imgPath);
+//   if (userId) {
+//     User.findOneAndUpdate(userId, {
+//       editingImage.
+//     })
+//   }
+//   else {
+//     res.status(400).json({
+//       error: "Missing userId parameter"
+//     });
+//   }
+// });
+
 app.post("/api/user/login",
   passport.authenticate("local"),
   (req, res) => {
@@ -118,4 +162,4 @@ app.get("/api/user/logout", (req, res) => {
   });
 })
 
-app.listen(process.env.PORT || 1337);
+server.listen(process.env.PORT || 1337);

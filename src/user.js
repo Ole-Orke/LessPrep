@@ -13,6 +13,10 @@ const userSchema = new Schema({
   tables: {
     type: Array,
     default: []
+  },
+  editingImage: {
+    data: Buffer,
+    contentType: String
   }
 });
 
