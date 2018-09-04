@@ -22,6 +22,7 @@ class ContentTable extends Component {
   }
 
   updateTable(event) {
+    
     console.log('inputIndex: ', this.state.inputIndex);
     var tempData = this.state.data.slice();
     console.log('TEMPDATA1', tempData)
@@ -32,6 +33,11 @@ class ContentTable extends Component {
       });
     }
     console.log('this.state.data: ', this.state.data)
+
+    // var tempState = store.state.tableData.slice();
+    // tempData.push(this.state.newData);
+    // let updatedTableData = tempState;
+    // this.props.updateStoreTable(updatedTableData);
   }
 
   updateConcept(event) {
@@ -160,7 +166,7 @@ class ContentTable extends Component {
         <div style={contentStyle}>
           <div className="content-table" style={{height:'100%', width:'100%'}}>
             <div className="table-title">
-              <Input type="text" placeholder="Table Title" onChange={this.props.saveTitle}></Input>
+              <Input type="text" placeholder="Table Title" onChange={(event) => this.props.saveTitle(event.target.value)}></Input>
             </div>
             <div className="table-labels" style={labelStyle}>
               <div className="col-sm-6"><strong>Concept:</strong></div>

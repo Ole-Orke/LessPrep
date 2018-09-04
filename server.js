@@ -4,6 +4,7 @@ const path = require('path');
 const app = express();
 const server = require("http").Server(app);
 const User = require("./src/user.js").User;
+const Table = require("./src/table.js").Table;
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
@@ -210,6 +211,22 @@ io.on("connection", (socket) => {
       });
     }
   });
+
+  app.post('/api/table', function(req, res) {
+    console.log(req.body);
+    let newTable = new Table ({
+      title: req.body.title,
+      data: req.body.data
+    });
+    newTable.save((err, table) => {
+      if (err) {
+        console.log('Saving error: ', err);
+      } else {
+        console.log('saved table to MongoDB!');
+        console.log('table set to:', table);
+      }
+    })
+  })
 });
 
 server.listen(process.env.PORT || 1337);

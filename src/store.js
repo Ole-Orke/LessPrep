@@ -17,6 +17,7 @@ const documentDefaultState = {
   tessFinish: false,
   revealExportOptions: false,
   tableTitle:"",
+  tableData: [],
 }
 
 const reducer = (state = documentDefaultState, action) => {
@@ -55,6 +56,11 @@ const reducer = (state = documentDefaultState, action) => {
       return {
         ...state,
         tableTitle: action.data.tableTitle,
+      }
+      case "UPDATE_TABLE":
+      return {
+        ...state,
+        tableData: action.data.tableData,
       }
     default:
       return state;
