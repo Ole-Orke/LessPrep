@@ -45,6 +45,7 @@ class App extends Component {
   }
 
   login(userId){
+    console.log("Login function userId:", userId);
     this.setState({
       loggedIn: true,
       sessionStarted: true,
