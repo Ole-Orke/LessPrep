@@ -33,9 +33,7 @@ class DocumentDisplay extends Component {
       socket.on("image", () => {
         console.log("Image received!");
         fetch("https://lessprep.herokuapp.com/api/photo")
-        .then((resp) => {
-          resp => resp.json();
-        })
+        .then((resp) => resp.json())
         .then((resJson) => {
           console.log(resJson);
         })
