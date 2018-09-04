@@ -211,7 +211,7 @@ io.on("connection", (socket) => {
     else {
       const userId = req.user._id;
       console.log("userId:", userId);
-      User.findById(userid, (error, user) => {
+      User.findById(userId, (error, user) => {
         if (error) {
           console.log(error);
         }
