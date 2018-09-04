@@ -25,13 +25,14 @@ class DocumentDisplay extends Component {
     socket.on("connect", () => {
       console.log("Socket.IO connected");
       socket.emit("ping");
+      socket.on("pong", () => {
+        console.log("Received pong from server");
+      });
+      socket.on("image", () => {
+        console.log("Image received!");
+      });
     });
-    socket.on("pong", () => {
-      console.log("Received pong from server");
-    });
-    socket.on("image", () => {
-      console.log("Image received!");
-    });
+
   }
 
   handleDrop(files, event) {
