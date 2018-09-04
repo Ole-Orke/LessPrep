@@ -83,7 +83,7 @@ class LandingPage extends Component {
           </Segment>
               {this.state.displayRegistration ?
                 <div>
-                {this.state.registering ? <Registration continueOffline={() => this.props.continueOffline()}  goToLogin={() => this.goToLogin()}/> : <Login login={() => this.props.login()} goToRegistration={() => this.goToRegistration()} />}
+                {this.state.registering ? <Registration continueOffline={() => this.props.continueOffline()}  goToLogin={() => this.goToLogin()}/> : <Login login={(userId) => this.props.login(userId)} goToRegistration={() => this.goToRegistration()} />}
             </div>
             :
             <div>
