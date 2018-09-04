@@ -52,7 +52,7 @@ const mapDispatchToProps = (dispatch) => ({
     });
   },
   saveTitle: (tableTitle) => {
-    // console.log(tableTitle);
+    console.log('tableTitle in dispatcher: ', tableTitle);
     dispatch({
       type: "SAVE_TITLE",
       data: {
