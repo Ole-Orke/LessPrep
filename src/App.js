@@ -228,7 +228,7 @@ class App extends Component {
           </div>
           :
             <div>
-              <LandingPage continueOffline={() => this.continueOffline()} login={() => this.login()} />
+              <LandingPage continueOffline={() => this.continueOffline()} login={() => this.login(userId)} />
             </div>
         }
 
