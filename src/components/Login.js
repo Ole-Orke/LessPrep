@@ -42,6 +42,7 @@ class Login extends Component {
       console.log("resJson:", resJson);
       if (resJson.success) {
         console.log("Login successful");
+        console.log("resJson.userId:", resJson.userId);
         this.props.login(resJson.userId);
       }
       else {
