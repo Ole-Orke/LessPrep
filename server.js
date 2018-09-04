@@ -153,12 +153,11 @@ io.on("connection", (socket) => {
 
   app.post('/api/photo', upload.single('photo'), function (req, res, next) {
     // req.file is the `avatar` file
-    // req.body will hold userId
-    console.log("req.body:", req.body);
+    //req.body has userId
     console.log("req.file:", req.file);
-    console.log("req.user:", req.user);
-    const userId = req.body.userId;
+    console.log("req.body:", req.body);
 
+    const userId = req.bodu.userId;
     User.findByIdAndUpdate(userId, {
       editingImage: {
         data: fs.readFileSync(req.file.path),
@@ -180,9 +179,14 @@ io.on("connection", (socket) => {
   });
 
   app.get("/api/photo", (req, res) => {
-    const userId = req.query.userId;
-    console.log("userId:", userId);
-    if (userId) {
+    if (!req.user) {
+      res.status(403).json({
+        error: "Unauthorized"
+      });
+    }
+    else {
+      const userId = req.user._id;
+      console.log("userId:", userId);
       User.findById(userid, (error, user) => {
         if (error) {
           console.log(error);
@@ -202,13 +206,8 @@ io.on("connection", (socket) => {
           });
         }
       });
-    }
-    else {
-      res.status(400).json({
-        error: "User ID must be specified"
-      });
-    }
-  });
+    });
+  }
 });
 
 server.listen(process.env.PORT || 1337);
