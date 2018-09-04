@@ -84,6 +84,7 @@ class App extends Component {
       },
     })
     .then(() => {
+      this.props.reset();
       this.setState({
         loggedIn: false,
         sessionStarted: false,
