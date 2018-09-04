@@ -34,8 +34,14 @@ class DocumentDisplay extends Component {
         console.log("Image received!");
         fetch("https://lessprep.herokuapp.com/api/photo")
         .then((resp) => {
-          console.log(resp);
-        });
+          resp => resp.json();
+        })
+        .then((resJson) => {
+          console.log(resJson);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
       });
     });
   }
