@@ -154,7 +154,7 @@ io.on("connection", (socket) => {
 
   app.post('/api/photo', upload.single('photo'), function (req, res, next) {
     // req.file is the `avatar` file
-    //req.body has userId
+    // req.body has userId
     console.log("req.file:", req.file);
     console.log("req.body:", req.body);
 
@@ -171,7 +171,7 @@ io.on("connection", (socket) => {
         });
       }
       else {
-        socket.emit("image")
+        socket.emit("image");
         res.status(200).json({
           success: true
         });

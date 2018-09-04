@@ -15,6 +15,7 @@ class App extends Component {
       tableData: [],
       sessionStarted: false,
       loggedIn: false,
+      userId: ""
     }
   }
 
@@ -35,10 +36,11 @@ class App extends Component {
     });
   }
 
-  login(){
+  login(userId){
     this.setState({
       loggedIn: true,
-      sessionStarted: true
+      sessionStarted: true,
+      userId: userId
     });
   }
 
@@ -63,8 +65,9 @@ class App extends Component {
     .then(() => {
       this.setState({
         loggedIn: false,
-        sessionStarted: false
-      })
+        sessionStarted: false,
+        userId: ""
+      });
     });
   }
 

@@ -39,7 +39,7 @@ class Login extends Component {
       return resp.json();
     })
     .then((resJson) => {
-      console.log(resJson);
+      console.log("resJson:", resJson);
       if (resJson.success) {
         console.log("Login successful");
         this.props.login();
