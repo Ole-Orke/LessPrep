@@ -147,27 +147,61 @@ io.on("connection", (socket) => {
 
   app.post('/api/photo', upload.single('photo'), function (req, res, next) {
     // req.file is the `avatar` file
-    // req.body will hold the text fields, if there were any
+    // req.body will hold userId
     console.log("req.body:", req.body);
     console.log("req.file:", req.file);
     console.log("req.user:", req.user);
-    let newUser = new User({
-      email: "test@test.com",
-      password: "test",
+    const userId = req.body.userId;
+
+    User.findByIdAndUpdate(userId, {
       editingImage: {
         data: fs.readFileSync(req.file.path),
         contentType: "image/jpeg",
       }
-    });
-    newUser.save((err, user) => {
-      if (err) {
-        console.log("Err:", err);
+    },(error) => {
+      if (error) {
+        res.status(500).json({
+          error: "Could not update editing image"
+        });
       }
-      console.log("Saved image to MongoDB!");
-      console.log("User:", user);
+      else {
+        socket.emit("image")
+        res.status(200).json({
+          success: true
+        });
+      }
     });
-    socket.emit("image");
-    res.status(201).send('success');
+  });
+
+  app.get("/api/photo", (req, res) => {
+    const userId = req.query.userId;
+    console.log("userId:", userId);
+    if (userId) {
+      User.findById(userid, (error, user) => {
+        if (error) {
+          console.log(error);
+        }
+        else if (!user) {
+          res.status(500).json({
+            error: "Could not retrieve user"
+          });
+        }
+        else {
+          res.status(200).json({
+            success: true,
+            editingImage: {
+              data: user.editingImage.data,
+              contentType: "image/jpeg"
+            }
+          });
+        }
+      });
+    }
+    else {
+      res.status(400).json({
+        error: "User ID must be specified"
+      });
+    }
   });
 });
 
