@@ -36,6 +36,7 @@ class DocumentDisplay extends Component {
         .then((resp) => resp.json())
         .then((resJson) => {
           console.log(resJson);
+          this.props.handleFileDrop(resJson.editingImage.src);
         })
         .catch((err) => {
           console.log(err);
