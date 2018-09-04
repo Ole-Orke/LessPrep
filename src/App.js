@@ -23,9 +23,17 @@ class App extends Component {
   }
 
   sendTable = (output) => {
+    // this.props.store.dispatch({
+    //   type: 'UPDATE_TABLE',
+    //   data: {
+    //     tableData: output
+    //   }
+    // });
+    console.log('store state: ', this.props.store.getState());
     this.setState({
       tableData: output
     });
+    console.log('store state: ', this.props.store.getState());
   }
 
   sendOutputText = (output) => {
@@ -49,7 +57,19 @@ class App extends Component {
   }
 
   saveTable() {
-
+    fetch('api/table', {
+      method: 'POST',
+      body: {
+        title: this.props.store.getState().tableTitle,
+        data: this.props.store.getState().tableData
+      }
+    })
+    .then(() => {
+      console.log('table saved')
+    })
+    .catch((error) => {
+      console.log('error: ', error)
+    })
   }
 
   logout() {
@@ -156,7 +176,7 @@ class App extends Component {
                         <Dropdown.Menu>
                           <Dropdown.Item text='New' />
                           <Dropdown.Item text='Open...' description='ctrl + o' />
-                          <Dropdown.Item text='Save as...' description='ctrl + s'/>
+                          <Dropdown.Item text='Save as...' description='ctrl + s' onClick={() => this.saveTable()}/>
                           <Dropdown.Item text='Rename' description='ctrl + r' />
                           <Dropdown.Item text='Make a copy' />
                           <Dropdown.Item icon='folder' text='Move to folder' />
@@ -187,7 +207,13 @@ class App extends Component {
                 setCroppedImage={(croppedImage) => this.props.setCroppedImage(croppedImage)}
                 send={(output) => this.sendOutputText(output)}
               />
-              <ContentTable style={{margin: "50px"}} send={(output) => this.sendTable(output)} saveTitle={this.props.saveTitle}/>
+              <ContentTable
+                style={{margin: "50px"}}
+                send={(output) => this.props.updateTable(output)}
+                store={this.props.store}
+                saveTitle={this.props.saveTitle}
+                updateStoreTable={this.props.updateTable}
+              />
             </div>
             <ExportBar
               store={this.props.store}
