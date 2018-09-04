@@ -6,18 +6,32 @@ import { Button } from "semantic-ui-react";
 import Script from "react-load-script";
 import GooglePicker from "react-google-picker";
 import axios from "axios";
+import io from "socket.io-client";
 
 const Tesseract = window.Tesseract;
+const url = "https://lessprep.herokuapp.com/";
 
 class DocumentDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: ""
+      token: "",
+      socket: io(url)
     }
   }
 
   componentDidMount() {
+    const socket = this.state.socket;
+    socket.on("connect", () => {
+      console.log("Socket.IO connected");
+      socket.emit("ping");
+    });
+    socket.on("pong", () => {
+      console.log("Received pong from server");
+    });
+    socket.on("image", () => {
+      console.log("Image received!");
+    });
   }
 
   handleDrop(files, event) {
