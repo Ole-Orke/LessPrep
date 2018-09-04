@@ -36,6 +36,11 @@ class DocumentDisplay extends Component {
         .then((resp) => resp.json())
         .then((resJson) => {
           console.log(resJson);
+          const base64 = Convert.ToBase64String(resJson.editingImage.data.data);
+          console.log("base64:", base64);
+          const imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+          console.log("imgSrc:", imgSrc);
+          this.props.handleFileDrop(imgSrc);
         })
         .catch((err) => {
           console.log(err);
