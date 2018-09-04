@@ -12,6 +12,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session");
 const fs = require("fs");
 const multer = require("multer");
+const btoa = require("btoa");
 const io = require("socket.io")(server);
 const upload = multer({ dest: 'uploads/' });
 const saltRounds = 10;
