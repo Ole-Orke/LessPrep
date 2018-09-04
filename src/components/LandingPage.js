@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Registration from "./Registration.js";
 import Login from "./Login.js";
-import { Icon, Button, Header, Container, Segment, Step } from "semantic-ui-react";
+import { Dropdown, Icon, Button, Header, Container, Segment, Step, Image, Responsive } from "semantic-ui-react";
 
 class LandingPage extends Component {
   constructor(props) {
@@ -16,6 +16,7 @@ class LandingPage extends Component {
   }
 
   componentDidMount() {
+    // console.log(logo)
     let exampleRolesLooper = this.exampleRolesLooper.bind(this)
     var index = setInterval(exampleRolesLooper, 3500);
   }
@@ -59,14 +60,25 @@ class LandingPage extends Component {
       <div className="landing-page">
           <Segment clearing id="landing-header">
             <Header as="a" className="header-text" floated="left" onClick={()=>this.toLandingPage()} href="#">
-              LessPrep
+              {/* <Image src={process.env.PUBLIC_URL + 'Images/LessPrep linear drop shadow.png'}></Image> */}
+              <Image src={require('/Users/khalidwilliams/LessPrep/src/Images/LessPrep linear drop shadow.png')}></Image>
+
             </Header>
             <Header id="nav-buttons" floated="right">
-              <Button.Group floated="right">
+              <Responsive as={Button.Group} floated="right" minWidth={440}>
                 <Button floated="right" onClick={()=>this.goToLogin()}>Login</Button>
                 <Button floated="right" onClick={()=>this.goToRegistration()}>Register</Button>
                 <Button floated="right" onClick={()=>this.props.continueOffline()}>Try Offline</Button>
-              </Button.Group>
+              </Responsive>
+              <Responsive as={Dropdown} maxWidth={439} icon='align justify'>
+                <Dropdown.Menu vertical direction="left">
+                  <Dropdown.Item onClick={()=>this.goToLogin()}>Login</Dropdown.Item>
+                  <Dropdown.Item onClick={()=>this.goToRegistration()}>Register</Dropdown.Item>
+                  <Dropdown.Item onClick={()=>this.props.continueOffline()}>Try Offline</Dropdown.Item>
+                </Dropdown.Menu>
+
+
+              </Responsive>
             </Header>
           </Segment>
               {this.state.displayRegistration ?
