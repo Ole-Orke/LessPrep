@@ -159,6 +159,9 @@ class ContentTable extends Component {
       return (
         <div style={contentStyle}>
           <div className="content-table" style={{height:'100%', width:'100%'}}>
+            <div className="table-title">
+              <input type="text" placeholder="Table Title"></input>
+            </div>
             <div className="table-labels" style={labelStyle}>
               <div className="col-sm-6"><strong>Concept:</strong></div>
               <div className="col-sm-6"><strong>Explanation:</strong></div>

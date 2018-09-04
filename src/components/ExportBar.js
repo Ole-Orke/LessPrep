@@ -91,6 +91,7 @@ class ExportBar extends Component {
     flashcardPdf.save(fileName);
   }
 
+
   render() {
     // console.log("export props", this.props);
     const exportStyle = {

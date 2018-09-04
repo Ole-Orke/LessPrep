@@ -48,6 +48,10 @@ class App extends Component {
     });
   }
 
+  saveTable() {
+
+  }
+
   logout() {
     fetch('/api/user/logout', {
       method: 'GET',
@@ -152,7 +156,7 @@ class App extends Component {
                         <Dropdown.Menu>
                           <Dropdown.Item text='New' />
                           <Dropdown.Item text='Open...' description='ctrl + o' />
-                          <Dropdown.Item text='Save as...' description='ctrl + s' />
+                          <Dropdown.Item text='Save as...' description='ctrl + s'/>
                           <Dropdown.Item text='Rename' description='ctrl + r' />
                           <Dropdown.Item text='Make a copy' />
                           <Dropdown.Item icon='folder' text='Move to folder' />
