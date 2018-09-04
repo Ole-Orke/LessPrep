@@ -61,10 +61,10 @@ class App extends Component {
   saveTable() {
     fetch('api/table', {
       method: 'POST',
-      body: {
+      body: JSON.stringify({
         title: this.props.store.getState().tableTitle,
         data: this.props.store.getState().tableData
-      }
+      })
     })
     .then(() => {
       console.log('table saved')
