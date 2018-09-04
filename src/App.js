@@ -113,7 +113,7 @@ class App extends Component {
                   <Grid.Column width={2}>
 
                       <Header style={{fontSize: "2.5em"}} className="App-title">
-                        <Image src={require('/Users/khalidwilliams/LessPrep/src/Images/LessPrep linear drop shadow.png')}></Image>
+                        <Image src={require('./Images/LessPrep linear drop shadow.png')}></Image>
                       </Header>
                     </Grid.Column>
                     <Grid.Column width={1}>
