@@ -222,7 +222,9 @@ io.on("connection", (socket) => {
           });
         }
         else {
-          const b64encoded = btoa(String.fromCharCode.apply(null, user.editingImage.data));
+          const b64encoded = btoa(new Uint8Array(user.editingImage.data).reduce(function (data, byte) {
+            return data + String.fromCharCode(byte);
+            }, ''));
           const datajpg = "data:image/jpg;base64," + b64encoded;
           res.status(200).json({
             success: true,
