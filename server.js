@@ -39,6 +39,7 @@ passport.use(new LocalStrategy(
         .then((valid) => {
           if(valid) {
             console.log("valid");
+            console.log("user:", user);
             return done(null, user);
           }
           else {
