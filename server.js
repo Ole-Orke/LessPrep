@@ -133,7 +133,8 @@ app.post("/api/user/login",
   (req, res) => {
     console.log(req.user);
     res.json({
-      success: true
+      success: true,
+      userId: req.user._id
     });
   }
 );
