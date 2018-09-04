@@ -169,6 +169,10 @@ io.on("connection", (socket) => {
     socket.emit("pong");
   });
 
+  socket.on("join", (userId) => {
+    socket.join(userId);
+  });
+
   app.post('/api/photo', upload.single('photo'), function (req, res, next) {
     // req.file is the `avatar` file
     // req.body has userId
