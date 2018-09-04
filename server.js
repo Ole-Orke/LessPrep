@@ -157,7 +157,7 @@ io.on("connection", (socket) => {
     console.log("req.file:", req.file);
     console.log("req.body:", req.body);
 
-    const userId = req.bodu.userId;
+    const userId = req.body.userId;
     User.findByIdAndUpdate(userId, {
       editingImage: {
         data: fs.readFileSync(req.file.path),
