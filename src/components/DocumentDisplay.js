@@ -25,7 +25,8 @@ class DocumentDisplay extends Component {
     socket.on("connect", () => {
       console.log("Socket.IO connected");
       socket.emit("ping");
-      socket.emit("join", this.state.userId);
+      console.log("userId:", this.props.userId);
+      socket.emit("join", this.props.userId);
       socket.on("pong", () => {
         console.log("Received pong from server");
       });

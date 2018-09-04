@@ -209,6 +209,7 @@ class App extends Component {
                 store={this.props.store}
                 setCroppedImage={(croppedImage) => this.props.setCroppedImage(croppedImage)}
                 send={(output) => this.sendOutputText(output)}
+                userId={this.state.userId}
               />
               <ContentTable
                 style={{margin: "50px"}}

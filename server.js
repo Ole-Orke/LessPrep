@@ -170,6 +170,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("join", (userId) => {
+    console.log("Join request:", userId);
     socket.join(userId);
   });
 
