@@ -134,6 +134,7 @@ app.post("/api/user/login",
 );
 
 app.get("/api/user/logout", (req, res) => {
+  console.log("req.user:", req.user);
   req.logout();
   res.json({
     success: true
