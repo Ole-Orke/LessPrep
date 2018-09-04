@@ -134,7 +134,7 @@ app.post("/api/user/login",
     console.log(req.user);
     res.json({
       success: true,
-      userId: req.user._id
+      userId: req.user._id,
     });
   }
 );
