@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const session = require("express-session");
 const fs = require("fs");
 const multer = require("multer");
 const io = require("socket.io")(server);
@@ -50,6 +51,9 @@ passport.use(new LocalStrategy(
   }
 ));
 
+app.use(session({
+  secret: process.env.SECRET
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
