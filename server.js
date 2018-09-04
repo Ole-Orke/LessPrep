@@ -173,6 +173,7 @@ io.on("connection", (socket) => {
       }
       else {
         console.log("Will emit image");
+        console.log("socket:", socket);
         socket.emit("image");
         res.status(200).json({
           success: true
