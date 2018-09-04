@@ -45,6 +45,7 @@ class App extends Component {
   }
 
   login(userId){
+    console.log("Login function userId:", userId);
     this.setState({
       loggedIn: true,
       sessionStarted: true,
@@ -218,6 +219,7 @@ class App extends Component {
                 store={this.props.store}
                 setCroppedImage={(croppedImage) => this.props.setCroppedImage(croppedImage)}
                 send={(output) => this.sendOutputText(output)}
+                userId={this.state.userId}
               />
               <ContentTable
                 style={{margin: "50px"}}
@@ -235,7 +237,7 @@ class App extends Component {
           </div>
           :
             <div>
-              <LandingPage continueOffline={() => this.continueOffline()} login={() => this.login()} />
+              <LandingPage continueOffline={() => this.continueOffline()} login={(userId) => this.login(userId)} />
             </div>
         }
 

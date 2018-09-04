@@ -25,14 +25,24 @@ class DocumentDisplay extends Component {
     socket.on("connect", () => {
       console.log("Socket.IO connected");
       socket.emit("ping");
+      console.log("userId:", this.props.userId);
+      socket.emit("join", this.props.userId);
       socket.on("pong", () => {
         console.log("Received pong from server");
       });
       socket.on("image", () => {
         console.log("Image received!");
+        fetch("https://lessprep.herokuapp.com/api/photo")
+        .then((resp) => resp.json())
+        .then((resJson) => {
+          console.log(resJson);
+          this.props.handleFileDrop(resJson.editingImage.src);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
       });
     });
-
   }
 
   handleDrop(files, event) {

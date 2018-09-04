@@ -12,6 +12,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session");
 const fs = require("fs");
 const multer = require("multer");
+const btoa = require("btoa");
 const io = require("socket.io")(server);
 const upload = multer({ dest: 'uploads/' });
 const saltRounds = 10;
@@ -182,6 +183,11 @@ io.on("connection", (socket) => {
     socket.emit("pong");
   });
 
+  socket.on("join", (userId) => {
+    console.log("Join request:", userId);
+    socket.join(userId);
+  });
+
   app.post('/api/photo', upload.single('photo'), function (req, res, next) {
     // req.file is the `avatar` file
     // req.body has userId
@@ -202,7 +208,7 @@ io.on("connection", (socket) => {
       }
       else {
         console.log("Will emit image");
-        socket.emit("image");
+        io.to(userId).emit("image");
         res.status(200).json({
           success: true
         });
@@ -219,7 +225,7 @@ io.on("connection", (socket) => {
     else {
       const userId = req.user._id;
       console.log("userId:", userId);
-      User.findById(userid, (error, user) => {
+      User.findById(userId, (error, user) => {
         if (error) {
           console.log(error);
         }
@@ -229,11 +235,14 @@ io.on("connection", (socket) => {
           });
         }
         else {
+          const b64encoded = btoa(new Uint8Array(user.editingImage.data).reduce(function (data, byte) {
+            return data + String.fromCharCode(byte);
+            }, ''));
+          const datajpg = "data:image/jpg;base64," + b64encoded;
           res.status(200).json({
             success: true,
             editingImage: {
-              data: user.editingImage.data,
-              contentType: "image/jpeg"
+              src: datajpg,
             }
           });
         }
