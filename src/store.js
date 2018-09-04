@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStore } from "redux";
 import { connect, Provider } from "react-redux";
-import App from './App';
+import App from './App.js';
 
 const documentDefaultState = {
   imageUrl: "",
@@ -16,6 +16,7 @@ const documentDefaultState = {
   outputText: "",
   tessFinish: false,
   revealExportOptions: false,
+  tableTitle:"",
 }
 
 const reducer = (state = documentDefaultState, action) => {
@@ -49,6 +50,11 @@ const reducer = (state = documentDefaultState, action) => {
       return {
         ...state,
         revealExportOptions: state.revealExportOptions
+      }
+      case "SAVE_TITLE":
+      return {
+        ...state,
+        tableTitle: action.data.tableTitle,
       }
     default:
       return state;
