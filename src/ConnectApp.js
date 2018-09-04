@@ -50,6 +50,14 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch({
       type: "RESET"
     });
+  },
+  saveTitle: (tableTitle) => {
+    dispatch({
+      type: "SAVE_TITLE",
+      data: {
+        tableTitle: tableTitle
+      }
+    })
   }
 });
 

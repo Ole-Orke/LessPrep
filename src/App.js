@@ -48,6 +48,10 @@ class App extends Component {
     });
   }
 
+  saveTable() {
+
+  }
+
   logout() {
     fetch('/api/user/logout', {
       method: 'GET',
@@ -145,14 +149,14 @@ class App extends Component {
                   <Grid.Column width={4} style={{display: 'inline'}}>
 
                       <Header style={{fontSize: "2.5em"}} className="App-title">
-                        <Image src={require('/Users/khalidwilliams/LessPrep/src/Images/LessPrep linear drop shadow.png')}></Image>
+                        <Image src={require('./Images/LessPrep linear drop shadow.png')}></Image>
                       </Header>
 
                       <Dropdown style={{fontSize: "2em"}} icon="align justify">
                         <Dropdown.Menu>
                           <Dropdown.Item text='New' />
                           <Dropdown.Item text='Open...' description='ctrl + o' />
-                          <Dropdown.Item text='Save as...' description='ctrl + s' />
+                          <Dropdown.Item text='Save as...' description='ctrl + s'/>
                           <Dropdown.Item text='Rename' description='ctrl + r' />
                           <Dropdown.Item text='Make a copy' />
                           <Dropdown.Item icon='folder' text='Move to folder' />
@@ -183,7 +187,7 @@ class App extends Component {
                 setCroppedImage={(croppedImage) => this.props.setCroppedImage(croppedImage)}
                 send={(output) => this.sendOutputText(output)}
               />
-              <ContentTable style={{margin: "50px"}} send={(output) => this.sendTable(output)}/>
+              <ContentTable style={{margin: "50px"}} send={(output) => this.sendTable(output)} saveTitle={this.props.saveTitle}/>
             </div>
             <ExportBar
               store={this.props.store}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Textarea from 'react-textarea-autosize';
-import { Button } from "semantic-ui-react";
+import { Button, Input } from "semantic-ui-react";
 
 class ContentTable extends Component {
   constructor(props) {
@@ -159,6 +159,9 @@ class ContentTable extends Component {
       return (
         <div style={contentStyle}>
           <div className="content-table" style={{height:'100%', width:'100%'}}>
+            <div className="table-title">
+              <Input type="text" placeholder="Table Title" onChange={this.props.saveTitle}></Input>
+            </div>
             <div className="table-labels" style={labelStyle}>
               <div className="col-sm-6"><strong>Concept:</strong></div>
               <div className="col-sm-6"><strong>Explanation:</strong></div>
