@@ -85,3 +85,5 @@ yarn-debug.log*
 yarn-error.log*
 
 config.js
+
+package-lock.json
