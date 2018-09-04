@@ -148,6 +148,22 @@ app.get("/api/user/logout", (req, res) => {
   });
 });
 
+app.post('/api/table', function(req, res) {
+  console.log(req.body);
+  let newTable = new Table ({
+    title: req.body.title,
+    data: req.body.data
+  });
+  newTable.save((err, table) => {
+    if (err) {
+      console.log('Saving error: ', err);
+    } else {
+      console.log('saved table to MongoDB!');
+      console.log('table set to:', table);
+    }
+  })
+})
+
 io.on("connection", (socket) => {
   socket.on("ping", (data) => {
     socket.emit("pong");
@@ -174,7 +190,7 @@ io.on("connection", (socket) => {
       else {
         console.log("Will emit image");
         console.log("socket:", socket);
-        socket.emit("image");
+        io.emit("image");
         res.status(200).json({
           success: true
         });
@@ -212,22 +228,6 @@ io.on("connection", (socket) => {
       });
     }
   });
-
-  app.post('/api/table', function(req, res) {
-    console.log(req.body);
-    let newTable = new Table ({
-      title: req.body.title,
-      data: req.body.data
-    });
-    newTable.save((err, table) => {
-      if (err) {
-        console.log('Saving error: ', err);
-      } else {
-        console.log('saved table to MongoDB!');
-        console.log('table set to:', table);
-      }
-    })
-  })
 });
 
 server.listen(process.env.PORT || 1337);
