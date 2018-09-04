@@ -190,7 +190,7 @@ io.on("connection", (socket) => {
       else {
         console.log("Will emit image");
         console.log("socket:", socket);
-        io.emit("image");
+        io.to(userId).emit("image");
         res.status(200).json({
           success: true
         });
