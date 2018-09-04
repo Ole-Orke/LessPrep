@@ -36,9 +36,6 @@ class DocumentDisplay extends Component {
         .then((resp) => resp.json())
         .then((resJson) => {
           console.log(resJson);
-          const b64encoded = btoa(String.fromCharCode.apply(null, resJson.editingImage.data.data));
-          const datajpg = "data:image/jpg;base64," + b64encoded;
-          this.props.handleFileDrop(datajpg);
         })
         .catch((err) => {
           console.log(err);

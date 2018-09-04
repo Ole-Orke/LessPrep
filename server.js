@@ -221,11 +221,12 @@ io.on("connection", (socket) => {
           });
         }
         else {
+          const b64encoded = btoa(String.fromCharCode.apply(null, user.editingImage.data));
+          const datajpg = "data:image/jpg;base64," + b64encoded;
           res.status(200).json({
             success: true,
             editingImage: {
-              data: user.editingImage.data,
-              contentType: "image/jpeg"
+              src: datajpg,
             }
           });
         }
