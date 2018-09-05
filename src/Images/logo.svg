@@ -11,13 +11,13 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="337.82596"
+   width="341.82596"
    height="187.12851"
-   viewBox="0 0 89.383115 49.511085"
+   viewBox="0 0 90.441447 49.511085"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06"
-   sodipodi:docname="LessPrep linear drop shadow.svg"
+   sodipodi:docname="logo.svg"
    inkscape:export-filename="/Users/khalidwilliams/Documents/Inkscape/LessPrep linear drop shadow.png"
    inkscape:export-xdpi="94.599998"
    inkscape:export-ydpi="94.599998">
@@ -164,7 +164,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.5621095"
-     inkscape:cx="216.77736"
+     inkscape:cx="147.32"
      inkscape:cy="111.68328"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
@@ -338,7 +338,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>

@@ -96,7 +96,7 @@ class Registration extends Component {
           </Responsive>
         </Responsive> */}
 
-        <Responsive as="div" style={formContainer}>
+        <div style={formContainer}>
           <div style={{textAlign: "center"}}>
             <h3>
               Register
@@ -112,7 +112,7 @@ class Registration extends Component {
             <input type="password" className="form-control" onChange={(event) => this.onPasswordChange(event)} value={this.state.password} placeholder="Password" required/>
           </div>
           {/* <Responsive as={Button.Group} fluid widths={3} minWidth={723}> */}
-          <Responsive as={Button.Group} fluid widths={3} minWidth={548}>
+          {/* <Responsive as={Button.Group} fluid widths={3} minWidth={548}>
             <Button onClick={() => this.register()} className="btn btn-light">
               Register
             </Button>
@@ -136,8 +136,30 @@ class Registration extends Component {
                 To Login
               </Button>
             </Grid.Column>
-          </Responsive>
-        </Responsive>
+          </Responsive> */}
+
+          {/* <Button.Group fluid vertical> */}
+            {/* <Button.Group as={Grid} widths={2}>
+              <Button as={Grid.Column}>Register</Button>
+              <Button as={Grid.Column}>To Login</Button>
+            </Button.Group> */}
+          {/* </Button.Group> */}
+          <Grid container vertical fluid>
+            <Grid.Row columns={2} as={Button.Group} fluid>
+              <Grid.Column as={Button} onClick={() => this.register()}>Register</Grid.Column>
+              <Grid.Column as={Button} onClick={() => this.props.goToLogin()}>To Login</Grid.Column>
+            </Grid.Row>
+            <Grid.Row as={Button} fluid onClick={() => this.props.continueOffline()} style={{marginRight:0}}>
+              <Grid.Column>
+                Continue Offline
+              </Grid.Column>
+            </Grid.Row>
+
+          </Grid>
+
+        </div>
+
+
 
       </div>
     )

@@ -10,7 +10,7 @@ class LandingPage extends Component {
     this.state = {
       registering: false,
       displayRegistration: false,
-      exampleRoles: ['teacher', 'writer', 'professor', 'researcher', 'tutor', 'historian'],
+      exampleRoles: ['teachers', 'writers', 'professors', 'researchers', 'tutors', 'historians'],
       rolesIndex: 0,
     }
   }
@@ -58,10 +58,10 @@ class LandingPage extends Component {
   render() {
     return (
       <div className="landing-page">
-          <Segment clearing id="landing-header">
-            <Header as="a" className="header-text" floated="left" onClick={()=>this.toLandingPage()} href="#">
+          <Segment id="landing-header" textAlign="center" basic>
+            <Header as="a" className="header-text" onClick={()=>this.toLandingPage()} href="#">
               {/* <Image src={process.env.PUBLIC_URL + 'Images/LessPrep linear drop shadow.png'}></Image> */}
-              <Image src={require('../Images/LessPrep linear drop shadow.png')}></Image>
+              <Image src={require('../Images/logo.svg')}></Image>
 
             </Header>
             <Header id="nav-buttons" floated="right">
@@ -74,13 +74,11 @@ class LandingPage extends Component {
             </div>
             :
             <div>
-              <Container className="rotating-roles" as="h1" textAlign="center">Are you a {this.state.exampleRoles[this.state.rolesIndex]}?</Container>
+              <Container className="rotating-roles" as="h1" textAlign="center">Made for {this.state.exampleRoles[this.state.rolesIndex]}</Container>
 
-              <Container className="landing-page-description">
+              <Container className="landing-page-description" textAlign="center">
                 <Container as="h2" textAlign="center">Stop redoing your lesson plans</Container>
-                <p>We hate redundancy. We know you do too. LessPrep is here to take the repetition out of lesson planning.
-                  Never re-write another worksheet, study guide or lesson plan again. Simply upload a picture, select the
-                  text you need, and output it to a variety of formats. Simple as that.</p>
+                <p>We hate redundancy. We know you do too. Automate your workflow with LessPrep</p>
               </Container>
               <Container as="h2" textAlign="center">How it works:</Container>
               <div className="how-it-works">
