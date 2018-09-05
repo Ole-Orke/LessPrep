@@ -60,15 +60,26 @@ class App extends Component {
   }
 
   saveTable() {
-    fetch('api/table', {
+    console.log('store state: ', this.props.store.getState())
+    let tempTitle = this.props.store.getState().tableTitle;
+    fetch('/api/table', {
       method: 'POST',
-      body: {
-        title: this.props.store.getState().tableTitle,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        // title: this.props.store.getState().tableTitle,
+        // data: this.props.store.getState().tableData
+        title: tempTitle,
         data: this.props.store.getState().tableData
-      }
+
+      })
     })
-    .then(() => {
-      console.log('table saved')
+    .then((resp) => resp.json())
+    .then((response) => {
+      if (response.error) {
+        alert(response.error);
+      }
     })
     .catch((error) => {
       console.log('error: ', error)
@@ -138,7 +149,7 @@ class App extends Component {
                   <Grid.Column width={2}>
 
                       <Header style={{fontSize: "2.5em"}} className="App-title">
-                        <Image src={require('./Images/LessPrep linear drop shadow.png')}></Image>
+                        <Image src={require('./Images/logo.svg')}></Image>
                       </Header>
                     </Grid.Column>
                     <Grid.Column width={1}>

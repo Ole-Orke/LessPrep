@@ -4,7 +4,6 @@ const path = require('path');
 const app = express();
 const server = require("http").Server(app);
 const User = require("./src/user.js").User;
-const Table = require("./src/table.js").Table;
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
@@ -39,16 +38,16 @@ passport.use(new LocalStrategy(
       hash = user.password;
       console.log(hash);
       bcrypt.compare(password, hash)
-        .then((valid) => {
-          if(valid) {
-            console.log("valid");
-            console.log("user:", user);
-            return done(null, user);
-          }
-          else {
-            return done(null, false);
-          }
-        });
+      .then((valid) => {
+        if(valid) {
+          console.log("valid");
+          console.log("user:", user);
+          return done(null, user);
+        }
+        else {
+          return done(null, false);
+        }
+      });
     });
   }
 ));
@@ -73,7 +72,7 @@ mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true}, (error) => {
 app.use(bodyParser.json())
 
 app.get('/ping', function (req, res) {
- return res.send('pong');
+  return res.send('pong');
 });
 
 //aasd
@@ -86,6 +85,7 @@ app.get('/', function (req, res) {
 
 app.post("/api/user/register", (req, res) => {
   const {password, email} = req.body;
+  console.log('pword and email: ', password, ', ', email);
   bcrypt.hash(password, saltRounds, function(err, hash) {
     if (err) {
       console.log(err);
@@ -96,18 +96,19 @@ app.post("/api/user/register", (req, res) => {
     else {
       const newUser = new User({
         email: email,
-        password: hash
+        password: hash,
+        tables: [],
       });
       newUser.save()
-        .then((user) => {
-          if(!user){
-            res.status(500).json({
-              error: "Could not save user"
-            });
-          }
-          else {
-            res.status(200).json({
-              success: true
+      .then((user) => {
+        if(!user){
+          res.status(500).json({
+            error: "Could not save user"
+          });
+        }
+        else {
+          res.status(200).json({
+            success: true
           });
         }
       })
@@ -131,14 +132,14 @@ app.post("/api/user/register", (req, res) => {
 // });
 
 app.post("/api/user/login",
-  passport.authenticate("local"),
-  (req, res) => {
-    console.log(req.user);
-    res.json({
-      success: true,
-      userId: req.user._id,
-    });
-  }
+passport.authenticate("local"),
+(req, res) => {
+  console.log(req.user);
+  res.json({
+    success: true,
+    userId: req.user._id,
+  });
+}
 );
 
 app.get("/api/user/logout", (req, res) => {
@@ -150,20 +151,33 @@ app.get("/api/user/logout", (req, res) => {
 });
 
 app.post('/api/table', function(req, res) {
-  console.log(req.body);
-  let newTable = new Table ({
-    title: req.body.title,
-    data: req.body.data
-  });
-  newTable.save((err, table) => {
-    if (err) {
-      console.log('Saving error: ', err);
-    } else {
-      console.log('saved table to MongoDB!');
-      console.log('table set to:', table);
-    }
-  })
-})
+  // console.log('REQ.user: ', req.user);
+  if (! req.user) {
+    res.status(400).json({
+      error: "User not logged in"
+    });
+  } else {
+
+    let newTable = {
+      title: req.body.title,
+      data: req.body.data
+    };
+
+    User.findByIdAndUpdate(req.user._id, {tables: req.user.tables.concat(newTable)}, (err)=> {
+      if (err) {
+        console.log('Saving error: ', err);
+        res.status(500).json({
+          error: "Could not save table"
+        });
+      } else {
+        console.log('saved table to MongoDB!');
+        res.status(200).json({
+          success: true
+        })
+      }
+    })
+  }
+});
 
 io.on("connection", (socket) => {
   socket.on("ping", (data) => {
@@ -236,6 +250,7 @@ io.on("connection", (socket) => {
       });
     }
   });
+
 });
 
 server.listen(process.env.PORT || 1337);

@@ -22,17 +22,17 @@ class ContentTable extends Component {
   }
 
   updateTable(event) {
-    
-    console.log('inputIndex: ', this.state.inputIndex);
+
+    // console.log('inputIndex: ', this.state.inputIndex);
     var tempData = this.state.data.slice();
     console.log('TEMPDATA1', tempData)
+    console.log('newData: ', this.state.newData);
     tempData.push(this.state.newData);
     if ((this.state.newData.concept && this.state.newData.explanation)) {
-      this.setState({data:tempData, newData:{concept:'',explanation:''}}, () => {
-        this.props.send(this.state.data);
-      });
+      this.props.send(tempData);
+      this.setState({data:tempData, newData:{concept:'',explanation:''}});
     }
-    console.log('this.state.data: ', this.state.data)
+    // console.log('this.state.data: ', this.state.data)
 
     // var tempState = store.state.tableData.slice();
     // tempData.push(this.state.newData);
@@ -41,11 +41,11 @@ class ContentTable extends Component {
   }
 
   updateConcept(event) {
-    console.log('this: ',this)
+    // console.log('this: ',this)
     var tempState = this.state;
     tempState.newData.concept = event.target.value;
     this.setState({newData:tempState.newData})
-    console.log('newData: ', this.state.newData)
+    // console.log('newData: ', this.state.newData)
   }
 
   editConcept (event) {
@@ -72,13 +72,13 @@ class ContentTable extends Component {
   }
 
   editExplanation(event) {
-    console.log('editExplanation called')
-    console.log('event.target.value: ', event.target.value)
+    // console.log('editExplanation called')
+    // console.log('event.target.value: ', event.target.value)
     var tempState = this.state;
-    console.log('tempState: ', tempState)
+    // console.log('tempState: ', tempState)
     tempState.data[event.target.attributes[1].value].explanation = event.target.value;
     this.setState({data:tempState.data, isEditing:true});
-    console.log('event.target.value: ', event.target.value)
+    // console.log('event.target.value: ', event.target.value)
   }
 
 
@@ -167,6 +167,7 @@ class ContentTable extends Component {
           <div className="content-table" style={{height:'100%', width:'100%'}}>
             <div className="table-title">
               <Input type="text" placeholder="Table Title" onChange={(event) => this.props.saveTitle(event.target.value)}></Input>
+              {/* <Input type="text" placeholder="Table Title" onChange={(event) => console.log(event.target.value)}></Input> */}
             </div>
             <div className="table-labels" style={labelStyle}>
               <div className="col-sm-6"><strong>Concept:</strong></div>

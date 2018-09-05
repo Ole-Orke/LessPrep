@@ -129,20 +129,20 @@ class ExportBar extends Component {
     return (
       <div style={exportStyle}>
         <div style={exportElementStyle}>
-          <Button onClick={() => this.props.reset()} className="btn btn-primary">Reset</Button>
+          <Button compact onClick={() => this.props.reset()} className="btn btn-primary">Reset</Button>
         </div>
         <div style={exportElementStyle}>
           <CopyToClipboard text={this.props.store.getState().outputText}
             onCopy={() => {console.log("copied!")}}>
-            <Button className="btn btn-primary">Copy to clipboard</Button>
+            <Button compact className="btn btn-primary">Copy to clipboard</Button>
           </CopyToClipboard>
         </div>
         <div style={exportElementStyle}>
-          <Button>Save</Button>
+          <Button compact>Save</Button>
         </div>
         <div style={exportElementStyle}>
-          <Button onClick={() => this.reveal()} className="btn btn-primary">Export</Button>
-          <Button onClick={()=> this.toFlashcard()} style={this.state.revealExportOptions ? exportOptionsOn : exportOptionsOff} className="btn export-to-flashcard">to Flashcards</Button>
+          <Button compact onClick={() => this.reveal()} className="btn btn-primary">Export</Button>
+          <Button compact onClick={()=> this.toFlashcard()} style={this.state.revealExportOptions ? exportOptionsOn : exportOptionsOff} className="btn export-to-flashcard">to Flashcards</Button>
         </div>
       </div>
     )
