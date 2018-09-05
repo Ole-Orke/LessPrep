@@ -57,8 +57,8 @@ class Login extends Component {
   render() {
     const formContainer = {
       marginTop: "5%",
-      marginRight: "20%",
-      marginLeft: "20%",
+      marginRight: "10%",
+      marginLeft: "10%",
       paddingTop: "2%",
       paddingLeft: "3%",
       paddingRight: "3%",
