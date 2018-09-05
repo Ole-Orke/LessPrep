@@ -65,20 +65,7 @@ class LandingPage extends Component {
 
             </Header>
             <Header id="nav-buttons" floated="right">
-              <Responsive as={Button.Group} floated="right" minWidth={440}>
-                <Button floated="right" onClick={()=>this.goToLogin()}>Login</Button>
-                <Button floated="right" onClick={()=>this.goToRegistration()}>Register</Button>
-                <Button floated="right" onClick={()=>this.props.continueOffline()}>Try Offline</Button>
-              </Responsive>
-              <Responsive as={Dropdown} maxWidth={439} icon='align justify'>
-                <Dropdown.Menu vertical direction="left">
-                  <Dropdown.Item onClick={()=>this.goToLogin()}>Login</Dropdown.Item>
-                  <Dropdown.Item onClick={()=>this.goToRegistration()}>Register</Dropdown.Item>
-                  <Dropdown.Item onClick={()=>this.props.continueOffline()}>Try Offline</Dropdown.Item>
-                </Dropdown.Menu>
 
-
-              </Responsive>
             </Header>
           </Segment>
               {this.state.displayRegistration ?
@@ -103,7 +90,22 @@ class LandingPage extends Component {
                   <Step icon="edit" title="Insert / Edit Text in Table"></Step>
                   <Step icon="download" title="Output!" description="Flashcards, worksheets and more!"></Step>
                 </Step.Group>
-                <Container as="h2" textAlign="center">Interested? Then {<a href='#' onClick={()=>this.goToRegistration()}>sign up now!</a>}</Container>
+                <Segment textAlign="center" basic>
+                  <Responsive as={Button.Group} minWidth={440}>
+                    <Button floated="right" onClick={()=>this.goToLogin()}>Login</Button>
+                    <Button floated="right" onClick={()=>this.goToRegistration()}>Register</Button>
+                    <Button floated="right" onClick={()=>this.props.continueOffline()}>Try Offline</Button>
+                  </Responsive>
+                  <Responsive as={Dropdown} maxWidth={439} icon='align justify'>
+                    <Dropdown.Menu vertical direction="left">
+                      <Dropdown.Item onClick={()=>this.goToLogin()}>Login</Dropdown.Item>
+                      <Dropdown.Item onClick={()=>this.goToRegistration()}>Register</Dropdown.Item>
+                      <Dropdown.Item onClick={()=>this.props.continueOffline()}>Try Offline</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Responsive>
+
+                </Segment>
+                {/* <Container as="h2" textAlign="center">Interested? Then {<a href='#' onClick={()=>this.goToRegistration()}>sign up now!</a>}</Container> */}
             </div>
             </div>
         }

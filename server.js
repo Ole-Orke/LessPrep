@@ -4,7 +4,6 @@ const path = require('path');
 const app = express();
 const server = require("http").Server(app);
 const User = require("./src/user.js").User;
-const Table = require("./src/table.js").Table;
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
@@ -86,6 +85,7 @@ app.get('/', function (req, res) {
 
 app.post("/api/user/register", (req, res) => {
   const {password, email} = req.body;
+  console.log('pword and email: ', password, ', ', email);
   bcrypt.hash(password, saltRounds, function(err, hash) {
     if (err) {
       console.log(err);
@@ -96,7 +96,8 @@ app.post("/api/user/register", (req, res) => {
     else {
       const newUser = new User({
         email: email,
-        password: hash
+        password: hash,
+        tables: [],
       });
       newUser.save()
       .then((user) => {
@@ -162,7 +163,7 @@ app.post('/api/table', function(req, res) {
       data: req.body.data
     };
 
-    User.findByIdAndUpdate(req.user._id, {tables: tables.concat(newTable)}, (err)=> {
+    User.findByIdAndUpdate(req.user._id, {tables: req.user.tables.concat(newTable)}, (err)=> {
       if (err) {
         console.log('Saving error: ', err);
         res.status(500).json({

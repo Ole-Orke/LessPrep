@@ -77,7 +77,9 @@ class App extends Component {
     })
     .then((resp) => resp.json())
     .then((response) => {
-      alert(response.error);
+      if (response.error) {
+        alert(response.error);
+      }
     })
     .catch((error) => {
       console.log('error: ', error)
@@ -146,7 +148,7 @@ class App extends Component {
                   <Grid.Column width={2}>
 
                       <Header style={{fontSize: "2.5em"}} className="App-title">
-                        <Image src={require('./Images/LessPrep linear drop shadow.png')}></Image>
+                        <Image src={require('./Images/logo.svg')}></Image>
                       </Header>
                     </Grid.Column>
                     <Grid.Column width={1}>
