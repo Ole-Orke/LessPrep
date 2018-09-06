@@ -166,7 +166,7 @@ class ContentTable extends Component {
         <div style={contentStyle}>
           <div className="content-table" style={{height:'100%', width:'100%'}}>
             <div className="table-title">
-              <Input type="text" placeholder="Table Title" onChange={(event) => this.props.saveTitle(event.target.value)}></Input>
+              <Input style={{minWidth: "20%"}} type="text" placeholder="Table Title" onChange={(event) => this.props.saveTitle(event.target.value)}></Input>
               {/* <Input type="text" placeholder="Table Title" onChange={(event) => console.log(event.target.value)}></Input> */}
             </div>
             <div className="table-labels" style={labelStyle}>

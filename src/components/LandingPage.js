@@ -61,7 +61,7 @@ class LandingPage extends Component {
           <Segment id="landing-header" textAlign="center" basic>
             <Header as="a" className="header-text" onClick={()=>this.toLandingPage()} href="#">
               {/* <Image src={process.env.PUBLIC_URL + 'Images/LessPrep linear drop shadow.png'}></Image> */}
-              <Image src={require('../Images/logo.svg')}></Image>
+              <Image src={require('../Images/LessPrep_Logo.png')}></Image>
 
             </Header>
             <Header id="nav-buttons" floated="right">

@@ -58,7 +58,6 @@ class DocumentDisplay extends Component {
 
   onCropChange(crop) {
     this.props.onCropChange(crop);
-    console.log("Store:", this.props.store.getState());
   }
 
   /**
@@ -167,7 +166,6 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
         {this.props.store.getState().displaying ?
           <div>
             <ReactCrop
-              style={this.props.store.getState().tessFinish ? {border: "3px solid green"} : {border: "3px solid red"}}
               crop={this.props.store.getState().crop}
               src={this.props.store.getState().imageUrl}
               onChange={(crop) => this.onCropChange(crop)}

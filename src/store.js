@@ -14,7 +14,7 @@ const documentDefaultState = {
   },
   croppedImage: "",
   outputText: "",
-  tessFinish: false,
+  tessFinish: true,
   revealExportOptions: false,
   tableTitle:"",
   tableData: [],

@@ -132,12 +132,6 @@ class ExportBar extends Component {
           <Button compact onClick={() => this.props.reset()} className="btn btn-primary">Reset</Button>
         </div>
         <div style={exportElementStyle}>
-          <CopyToClipboard text={this.props.store.getState().outputText}
-            onCopy={() => {console.log("copied!")}}>
-            <Button compact className="btn btn-primary">Copy to clipboard</Button>
-          </CopyToClipboard>
-        </div>
-        <div style={exportElementStyle}>
           <Button compact>Save</Button>
         </div>
         <div style={exportElementStyle}>

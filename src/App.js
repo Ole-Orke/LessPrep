@@ -3,7 +3,8 @@ import ContentTable from "./components/ContentTable.js";
 import DocumentDisplay from "./components/DocumentDisplay.js";
 import ExportBar from "./components/ExportBar.js";
 import LandingPage from "./components/LandingPage.js";
-import { Image, Header, Segment, Button, Dropdown, Grid, Responsive, Icon } from "semantic-ui-react";
+import { Image, Header, Segment, Button, Dropdown, Grid, Responsive, Icon, Loader } from "semantic-ui-react";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import './App.css';
 
 class App extends Component {
@@ -146,28 +147,44 @@ class App extends Component {
             <Responsive as={Segment} style={{padding: 0, margin: 0}} minWidth={1170}>
               <Grid className="App" style={{margin: 0}} verticalAlign="bottom">
                 <Grid.Row>
+                  <Grid.Column width={1}>
+                    <Icon as={Dropdown} style={{fontSize: "2em"}} icon="align justify" size='mini'>
+                      <Dropdown.Menu>
+                        <Dropdown.Item text='New' />
+                        <Dropdown.Item text='Open...'/>
+                        <Dropdown.Item text='Save as...' onClick={() => this.saveTable()}/>
+                      </Dropdown.Menu>
+                    </Icon>
+                </Grid.Column>
                   <Grid.Column width={2}>
-
                       <Header style={{fontSize: "2.5em"}} className="App-title">
-                        <Image src={require('./Images/logo.svg')} shapeRendering="crisp-edges"></Image>
+                        <Image src={require('./Images/LessPrep_Logo_extended.png')} shapeRendering="crisp-edges"></Image>
                       </Header>
                     </Grid.Column>
-                    <Grid.Column width={1}>
-                      <Icon as={Dropdown} style={{fontSize: "2em"}} icon="align justify" size='mini'>
-                        <Dropdown.Menu>
-                          <Dropdown.Item text='New' />
-                          <Dropdown.Item text='Open...' description='ctrl + o' />
-                          <Dropdown.Item text='Save as...' description='ctrl + s' />
-                          <Dropdown.Item text='Rename' description='ctrl + r' />
-                          <Dropdown.Item text='Make a copy' />
-                          <Dropdown.Item icon='folder' text='Move to folder' />
-                          <Dropdown.Item icon='trash' text='Move to trash' />
-                          <Dropdown.Divider />
-                          <Dropdown.Item text='Download As...' />
-                          <Dropdown.Item text='Publish To Web' />
-                          <Dropdown.Item text='E-mail Collaborators' />
-                        </Dropdown.Menu>
-                      </Icon>
+                  <Grid.Column>
+                    {this.props.store.getState().imageUrl ?
+                      <div as={Grid.Column} width={1}>
+                        {this.props.store.getState().tessFinish ?
+                          <div>
+                            {this.props.store.getState().outputText ?
+                              <CopyToClipboard text={this.props.store.getState().outputText}
+                                onCopy={() => {console.log("copied!")}}>
+                                <Button className="btn">Copy to clipboard</Button>
+                              </CopyToClipboard>
+                            :
+                            <div></div>
+                          }
+                          </div>
+                        :
+                        <div style={{display: "inline-block", marginBottom: "30px"}}>
+                          <Loader active>Working</Loader>
+                        </div>
+                      }
+                      </div>
+                    :
+                    <div>
+                    </div>
+                  }
                   </Grid.Column>
                   {/* <Grid.Column as={Button} floated="right" onClick={() => this.logout()} width={1} centered>
                     Logout
@@ -185,22 +202,14 @@ class App extends Component {
                   <Grid.Column width={4} style={{display: 'inline'}}>
 
                       <Header style={{fontSize: "2.5em"}} className="App-title">
-                        <Image src={require('./Images/LessPrep linear drop shadow.png')}></Image>
+                        <Image src={require('./Images/LessPrep_Logo.png')}></Image>
                       </Header>
 
                       <Dropdown style={{fontSize: "2em"}} icon="align justify">
                         <Dropdown.Menu>
                           <Dropdown.Item text='New' />
-                          <Dropdown.Item text='Open...' description='ctrl + o' />
-                          <Dropdown.Item text='Save as...' description='ctrl + s' onClick={() => this.saveTable()}/>
-                          <Dropdown.Item text='Rename' description='ctrl + r' />
-                          <Dropdown.Item text='Make a copy' />
-                          <Dropdown.Item icon='folder' text='Move to folder' />
-                          <Dropdown.Item icon='trash' text='Move to trash' />
-                          <Dropdown.Divider />
-                          <Dropdown.Item text='Download As...' />
-                          <Dropdown.Item text='Publish To Web' />
-                          <Dropdown.Item text='E-mail Collaborators' />
+                          <Dropdown.Item text='Open...' />
+                          <Dropdown.Item text='Save as...' onClick={() => this.saveTable()}/>
                         </Dropdown.Menu>
                       </Dropdown>
                   </Grid.Column>
