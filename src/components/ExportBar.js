@@ -22,11 +22,13 @@ class ExportBar extends Component {
   toFlashcard() {
     let fileName = prompt('Filename:', 'Ex: my-flashcards');
     console.log('fileName: ', fileName)
-    let tableVals = this.props.table.slice();
+    console.log('this.props.store: ', this.props.store)
+    let tableVals = this.props.store.getState().tableData.slice();
     let tableLength  = tableVals.length;
     let pagesToMake = Math.ceil(tableLength / 6);
     let leftovers = tableLength % 6;
-    console.log('pagesToMake:', pagesToMake);
+    console.log('tableLength: ', tableLength)
+    console.log('pagesToMake: ', pagesToMake);
     console.log('leftovers: ', leftovers);
     console.log(tableVals);
 
@@ -58,9 +60,10 @@ class ExportBar extends Component {
     })
 
     // Big loop, one for each set of 6
+    var flashcardPdf = null;
     for (let i = 1; i <= pagesToMake; i++) {
       if (! flashcardPdf) {
-        var flashcardPdf = new jsPdf();
+        flashcardPdf = new jsPdf();
       } else {
         flashcardPdf.addPage()
       }
