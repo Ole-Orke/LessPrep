@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Textarea from 'react-textarea-autosize';
-import { Button, Input } from "semantic-ui-react";
+import { Table, Button, Input } from "semantic-ui-react";
 
 class ContentTable extends Component {
   constructor(props) {
@@ -100,14 +100,17 @@ class ContentTable extends Component {
 
     const cellStyle1 = {
       border:'solid #d2d2d2 1px',
-      minHeight: '20px'
+      minHeight: '20px',
+      padding: '15px',
+      borderRadius: '2px',
     }
 
     const cellStyle2 = {
       border:'solid #d2d2d2 1px',
       backgroundColor: '#f7f9ff',
-      minHeight: '20px'
-
+      minHeight: '20px',
+      padding: '15px',
+      borderRadius: '2px',
     }
 
     let index = 0;
@@ -175,10 +178,15 @@ class ContentTable extends Component {
         flexDirection: 'row'
       }
 
-      const inputStyle = {
+      const inputContainerStyle = {
         display: 'flex',
         flexDirection: 'row',
         paddingTop: '7px'
+      }
+
+      const inputStyle = {
+        padding: '15px',
+        borderRadius: '2px',
       }
 
 
@@ -189,7 +197,12 @@ class ContentTable extends Component {
         <div style={contentStyle}>
           <div className="content-table" style={{height:'100%', width:'100%'}}>
             <div className="table-title">
-              <Input type="text" placeholder="Table Title" onChange={(event) => this.props.saveTitle(event.target.value)}></Input>
+              <Input
+                type="text"
+                placeholder="Table Title"
+                onChange={(event) => this.props.saveTitle(event.target.value)}
+                style={{paddingLeft:'15px'}}>
+                </Input>
               {/* <Input type="text" placeholder="Table Title" onChange={(event) => console.log(event.target.value)}></Input> */}
             </div>
             <div className="table-labels" style={labelStyle}>
@@ -199,8 +212,9 @@ class ContentTable extends Component {
             <div id="table-data">
               {this.renderMap()}
             </div>
-            <div className="content-input-container" style={inputStyle}>
+            <div className="content-input-container" style={inputContainerStyle}>
               <input
+                style={inputStyle}
                 className="col-sm-6"
                 id="ConceptInput" placeholder="New concept"
                 onChange={(event)=>(this.updateConcept(event))}
@@ -209,6 +223,7 @@ class ContentTable extends Component {
                 onClick={()=>this.setState({isEditing:false})}
               />
               <Textarea
+                style={inputStyle}
                 className="col-sm-6"
                 id="ExplanationInput"
                 placeholder="New explanation"
