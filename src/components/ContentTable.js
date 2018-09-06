@@ -111,6 +111,29 @@ class ContentTable extends Component {
     }
 
     let index = 0;
+    // this.state.data.map((pair) => {
+    //   result.push(
+    //     <div className="col-sm-12" style={labelStyle}>
+    //       <input
+    //         className="col-sm-6 cell"
+    //         style={(index %2) ? cellStyle1 : cellStyle2}
+    //         rowindex={index}
+    //         onChange={(event)=>{this.editConcept(event); this.updateTable(event)}}
+    //         onKeyDown={(e)=>this.keyPress(e)}
+    //         // value={this.state.editContent ? this.state.editContent : pair.concept}
+    //         value={pair.concept}
+    //       />
+    //       <Textarea
+    //         className="col-sm-6 cell"
+    //         style={(index %2) ? cellStyle1 : cellStyle2 }
+    //         rowindex={index}
+    //         onChange={(event)=>{this.editExplanation(event); this.updateTable(event)}}
+    //         value={pair.explanation}
+    //       />
+    //       </div>
+    //     )
+    //     index ++;
+    //   })
     this.state.data.map((pair) => {
       result.push(
         <div className="col-sm-12" style={labelStyle}>
