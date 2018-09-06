@@ -140,7 +140,7 @@ class ContentTable extends Component {
     this.state.data.map((pair) => {
       result.push(
         <div className="col-sm-12" style={labelStyle}>
-          <input
+          <Textarea
             className="col-sm-6 cell"
             style={(index %2) ? cellStyle1 : cellStyle2}
             rowindex={index}
@@ -202,7 +202,7 @@ class ContentTable extends Component {
                 placeholder="Table Title"
                 onChange={(event) => this.props.saveTitle(event.target.value)}
                 style={{paddingLeft:'15px'}}>
-                </Input>
+              </Input>
               {/* <Input type="text" placeholder="Table Title" onChange={(event) => console.log(event.target.value)}></Input> */}
             </div>
             <div className="table-labels" style={labelStyle}>
@@ -213,7 +213,7 @@ class ContentTable extends Component {
               {this.renderMap()}
             </div>
             <div className="content-input-container" style={inputContainerStyle}>
-              <input
+              <Textarea
                 style={inputStyle}
                 className="col-sm-6"
                 id="ConceptInput" placeholder="New concept"
