@@ -132,7 +132,9 @@ div {
 }
 
 #landing-header {
-  background-color: #f2f2f2;
+  background-color: #7881ff;
+  padding: 0;
+  margin: 0;
 }
 
 #landing-header > .header-text {
@@ -161,7 +163,7 @@ div {
 .landing-page-description {
   border: solid rgba(34,36,38,0.15) 1px;
   border-radius: 5px;
-  background-color: #f2f2f2;
+  background-color: #fff;
   padding-bottom: 2%;
 }
 
@@ -180,7 +182,11 @@ div {
   border: 0px;
 }
 
-
+#logo {
+  margin: 0;
+  width: 17%;
+  padding: 0;
+}
 
 a {
   color: #007990;

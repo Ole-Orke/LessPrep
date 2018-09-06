@@ -61,7 +61,7 @@ class LandingPage extends Component {
           <Segment id="landing-header" textAlign="center" basic>
             <Header as="a" className="header-text" onClick={()=>this.toLandingPage()} href="#">
               {/* <Image src={process.env.PUBLIC_URL + 'Images/LessPrep linear drop shadow.png'}></Image> */}
-              <Image src={require('../Images/LessPrep_Logo.png')}></Image>
+              <Image id="logo" src={require('../Images/LessPrep_Logo_extended.png')}></Image>
 
             </Header>
             <Header id="nav-buttons" floated="right">
@@ -90,9 +90,9 @@ class LandingPage extends Component {
                 </Step.Group>
                 <Segment textAlign="center" basic>
                   <Responsive as={Button.Group} minWidth={440}>
-                    <Button floated="right" onClick={()=>this.goToLogin()}>Login</Button>
-                    <Button floated="right" onClick={()=>this.goToRegistration()}>Register</Button>
-                    <Button floated="right" onClick={()=>this.props.continueOffline()}>Try Offline</Button>
+                    <Button basic size='huge' color='blue' floated="right" onClick={()=>this.goToLogin()}>Login</Button>
+                    <Button basic size='huge' color='blue' floated="right" onClick={()=>this.goToRegistration()}>Register</Button>
+                    <Button basic size='huge' color='blue' floated="right" onClick={()=>this.props.continueOffline()}>Try Offline</Button>
                   </Responsive>
                   <Responsive as={Dropdown} maxWidth={439} icon='align justify'>
                     <Dropdown.Menu vertical direction="left">

@@ -202,7 +202,7 @@ class App extends Component {
                   <Grid.Column width={4} style={{display: 'inline'}}>
 
                       <Header style={{fontSize: "2.5em"}} className="App-title">
-                        <Image src={require('./Images/LessPrep_Logo.png')}></Image>
+                        <Image src={require('./Images/LessPrep_Logo_extended.png')}></Image>
                       </Header>
 
                       <Dropdown style={{fontSize: "2em"}} icon="align justify">
