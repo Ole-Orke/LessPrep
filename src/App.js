@@ -148,7 +148,7 @@ class App extends Component {
               <Grid className="App" style={{margin: 0}} verticalAlign="bottom">
                 <Grid.Row>
                   <Grid.Column width={1}>
-                    <Icon as={Dropdown} style={{fontSize: "2em"}} icon="align justify" size='mini'>
+                    <Icon as={Dropdown} style={{fontSize: "2em"}} icon="bars" size='mini'>
                       <Dropdown.Menu>
                         <Dropdown.Item text='New' />
                         <Dropdown.Item text='Open...'/>

@@ -182,6 +182,10 @@ div {
   border: 0px;
 }
 
+.descriptionText {
+  font-size: 20px;
+}
+
 #logo {
   margin: 0;
   width: 17%;
