@@ -132,12 +132,6 @@ class ExportBar extends Component {
     return (
       <div style={exportStyle}>
         <div style={exportElementStyle}>
-          <Button compact onClick={() => this.props.reset()} className="btn btn-primary">Reset</Button>
-        </div>
-        <div style={exportElementStyle}>
-          <Button compact>Save</Button>
-        </div>
-        <div style={exportElementStyle}>
           <Button compact onClick={() => this.reveal()} className="btn btn-primary">Export</Button>
           <Button compact onClick={()=> this.toFlashcard()} style={this.state.revealExportOptions ? exportOptionsOn : exportOptionsOff} className="btn export-to-flashcard">to Flashcards</Button>
         </div>
