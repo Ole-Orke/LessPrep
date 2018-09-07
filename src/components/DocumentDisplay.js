@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import FileDrop from "react-file-drop";
 import ReactCrop from "react-image-crop";
 import 'react-image-crop/dist/ReactCrop.css';
-import { Button } from "semantic-ui-react";
+import { Button, Icon } from "semantic-ui-react";
 import Script from "react-load-script";
 import GooglePicker from "react-google-picker";
 import axios from "axios";
@@ -173,7 +173,7 @@ getCroppedImg(imageUrl, pixelCrop, fileName) {
             />
           </div>
             :
-            <FileDrop style={fileDropStyle} id="croppedImage" onDrop={(files, event) => this.handleDrop(files, event)}>Drop an image here, or upload from Camera App
+            <FileDrop style={fileDropStyle} id="croppedImage" onDrop={(files, event) => this.handleDrop(files, event)}><Icon size="big" name="upload" />{<br/>}Drop an image here, or upload from Camera App
             </FileDrop>}
       </div>
     )

@@ -135,6 +135,7 @@ div {
   background-color: #7881ff;
   padding: 0;
   margin: 0;
+  min-height: 100px;
 }
 
 #landing-header > .header-text {
@@ -190,6 +191,8 @@ div {
   margin: 0;
   width: 17%;
   padding: 0;
+  min-height: 100px;
+  min-width: 178px;
 }
 
 a {
