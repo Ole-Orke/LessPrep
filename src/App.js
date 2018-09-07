@@ -219,20 +219,18 @@ class App extends Component {
                     {this.props.store.getState().imageUrl ?
                       <div as={Grid.Column}>
                         {this.props.store.getState().tessFinish ?
-                          <div>
+                          <div style={{marginBottom: "-20px"}}>
                             {this.props.store.getState().outputText ?
                               <CopyToClipboard text={this.props.store.getState().outputText}
                                 onCopy={() => {console.log("copied!")}}>
-                                <Button className="btn">Copy to clipboard</Button>
+                                <Button inverted color="white" className="btn">Copy to clipboard</Button>
                               </CopyToClipboard>
                               :
                               <div></div>
                             }
                             <div style={exportElementStyle}>
-
                             </div>
                           </div>
-
                           :
                           <div style={{display: "inline-block", marginBottom: "30px"}}>
                             <Loader active>Working</Loader>
