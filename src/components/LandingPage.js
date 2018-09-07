@@ -74,7 +74,7 @@ class LandingPage extends Component {
             </div>
             :
             <div>
-              <Responsive>
+              <Responsive minWidth={1080}>
                 <Grid>
                   <Grid.Row>
                     <Grid.Column width={16}>
@@ -147,6 +147,100 @@ class LandingPage extends Component {
                   </Grid.Row>
                 </Grid>
               </Responsive>
+
+              <Responsive maxWidth={1079}>
+                <Grid>
+                  <Grid.Row>
+                    <Grid.Column width={16}>
+                      <Container className="rotating-roles" as="h1" textAlign="center">Tools for {this.state.exampleRoles[this.state.rolesIndex]}</Container>
+                    </Grid.Column>
+                  </Grid.Row>
+
+                  <Grid.Row>
+                    <Grid.Column width={3}></Grid.Column>
+                    <Grid.Column width={10}>
+                      <Container as="h1" textAlign="center">
+                        Transcribe text {<br/>}
+                        <Icon name="file text"></Icon>
+                      </Container>
+                    </Grid.Column>
+                    <Grid.Column width={3}></Grid.Column>
+                  </Grid.Row>
+
+                  <Grid.Row>
+                    <Grid.Column width={3}></Grid.Column>
+                    <Grid.Column width={10}>
+                      <Container className="descriptionText" as="p" textAlign="center">
+                        Easily extract text from your documents in seconds. Just select the text, copy to clipboard and paste anywhere you want.
+                      </Container>
+                    </Grid.Column>
+                    <Grid.Column width={3}></Grid.Column>
+                  </Grid.Row>
+
+                  <Grid.Row>
+                    <Grid.Column width={3}></Grid.Column>
+                    <Grid.Column width={10}>
+                      <Container as="h1" textAlign="center">
+                        Make Flashcards {<br/>}
+                        <Icon name="table"></Icon>
+                      </Container>
+                    </Grid.Column>
+                    <Grid.Column width={3}></Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row>
+                    <Grid.Column width={3}></Grid.Column>
+                    <Grid.Column width={10}>
+                      <Container className="descriptionText" as="p" textAlign="center">
+                        Create flashcards using our flashcard editor, then export to PDF.
+                      </Container>
+                    </Grid.Column>
+                    <Grid.Column width={3}></Grid.Column>
+                  </Grid.Row>
+
+                  <Grid.Row>
+                    <Grid.Column width={3}></Grid.Column>
+                    <Grid.Column width={10}>
+                      <Container as="h1" textAlign="center">
+                        Easy Upload {<br/>}
+                        <Icon name="upload"></Icon>
+                      </Container>
+                    </Grid.Column>
+                    <Grid.Column width={3}></Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row>
+                    <Grid.Column width={3}></Grid.Column>
+                    <Grid.Column width={10}>
+                      <Container className="descriptionText" as="p" textAlign="center">
+                        Drag and drop files directly or upload from your phone!
+                      </Container>
+                    </Grid.Column>
+                    <Grid.Column width={3}></Grid.Column>
+                  </Grid.Row>
+
+                  <Grid.Row>
+                    <Grid.Column width={3}></Grid.Column>
+                    <Grid.Column width={10}>
+                      <Container as="h1" textAlign="center">
+                        Save your work {<br/>}
+                        <Icon name="save"></Icon>
+                      </Container>
+                    </Grid.Column>
+                    <Grid.Column width={3}></Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row>
+                    <Grid.Column width={3}></Grid.Column>
+                    <Grid.Column width={10}>
+                      <Container className="descriptionText" as="p" textAlign="center">
+                        Store your data and pick up where you left off.
+                      </Container>
+                    </Grid.Column>
+                    <Grid.Column width={3}></Grid.Column>
+                  </Grid.Row>
+
+
+
+                </Grid>
+              </Responsive>
               <Divider horizontal><h1>The basics</h1></Divider>
               {/*}<Container as="h1" textAlign="center">How it works:</Container>{*/}
               <div className="how-it-works">
@@ -162,12 +256,10 @@ class LandingPage extends Component {
                     <Button basic size='huge' color='blue' floated="right" onClick={()=>this.goToRegistration()}>Register</Button>
                     <Button basic size='huge' color='blue' floated="right" onClick={()=>this.props.continueOffline()}>Try Offline</Button>
                   </Responsive>
-                  <Responsive as={Dropdown} maxWidth={439} icon='align justify'>
-                    <Dropdown.Menu vertical direction="left">
-                      <Dropdown.Item onClick={()=>this.goToLogin()}>Login</Dropdown.Item>
-                      <Dropdown.Item onClick={()=>this.goToRegistration()}>Register</Dropdown.Item>
-                      <Dropdown.Item onClick={()=>this.props.continueOffline()}>Try Offline</Dropdown.Item>
-                    </Dropdown.Menu>
+                  <Responsive as={Button.Group} vertical maxWidth={439} icon='align justify'>
+                    <Button basic size='huge' color='blue' floated="right" onClick={()=>this.goToLogin()}>Login</Button>
+                    <Button basic size='huge' color='blue' floated="right" onClick={()=>this.goToRegistration()}>Register</Button>
+                    <Button basic size='huge' color='blue' floated="right" onClick={()=>this.props.continueOffline()}>Try Offline</Button>
                   </Responsive>
 
                 </Segment>
