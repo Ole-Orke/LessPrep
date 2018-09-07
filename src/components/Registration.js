@@ -144,14 +144,30 @@ class Registration extends Component {
               <Button as={Grid.Column}>To Login</Button>
             </Button.Group> */}
           {/* </Button.Group> */}
-          <Grid container vertical fluid>
+          {/* <Grid container vertical fluid>
             <Grid.Row columns={2} as={Button.Group} fluid>
-              <Grid.Column as={Button} onClick={() => this.register()}>Register</Grid.Column>
-              <Grid.Column as={Button} onClick={() => this.props.goToLogin()}>To Login</Grid.Column>
+              <Grid.Column as={Button} onClick={() => this.register()} basic color='blue'>Register</Grid.Column>
+              <Grid.Column as={Button} onClick={() => this.props.goToLogin()} basic color='blue'>To Login</Grid.Column>
             </Grid.Row>
-            <Grid.Row as={Button} fluid onClick={() => this.props.continueOffline()} style={{marginRight:0}}>
+            <Grid.Row as={Button} basic color='blue'  fluid onClick={() => this.props.continueOffline()} style={{marginRight:0}}>
               <Grid.Column>
                 Continue Offline
+              </Grid.Column>
+            </Grid.Row>
+          </Grid> */}
+
+          <Grid container vertical fluid textAlign='center'>
+            <Grid.Row columns={2} as={Button.Group} fluid>
+              <Grid.Column>
+                <Button fluid basic color="blue" onClick={() => this.register()}>Register</Button>
+              </Grid.Column>
+              <Grid.Column>
+                <Button fluid basic color="blue" onClick={() => this.props.goToLogin()}>To Login</Button>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>
+                <Button fluid basic color='blue' onClick={() => this.props.continueOffline()}>Continue Offline</Button>
               </Grid.Column>
             </Grid.Row>
 

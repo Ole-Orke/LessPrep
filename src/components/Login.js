@@ -81,20 +81,20 @@ class Login extends Component {
             <input type="password" className="form-control" onChange={(event) => this.onPasswordChange(event)} value={this.state.password} placeholder="Password" />
           </div>
           <Responsive as={Button.Group} fluid widths={2} minWidth={548}>
-            <Button onClick={() => this.login()} className="btn btn-light">
+            <Button basic color='blue' onClick={() => this.login()}>
               Login
             </Button>
-            <Button onClick={() => this.props.goToRegistration()} className="btn btn-light">
+            <Button basic color='blue' onClick={() => this.props.goToRegistration()}>
               To Registration
             </Button>
           </Responsive>
 
           <Responsive as={Grid}  maxWidth={547} centered>
             <Grid.Column as={Button.Group} vertical size='small'>
-              <Button onClick={() => this.register()} className="btn btn-light" >
+              <Button onClick={() => this.register()} basic color='blue' >
                 Register
               </Button>
-              <Button onClick={() => this.props.continueOffline()} className="btn btn-light">
+              <Button onClick={() => this.props.continueOffline()} basic color='blue'>
                 Continue Offline
               </Button>
             </Grid.Column>
