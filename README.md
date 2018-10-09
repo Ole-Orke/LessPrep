@@ -1,6 +1,8 @@
-# Lessprep
+# LessPrep
 
-Automated text-recognition form pictures, flashcard templates combined with an intuitive UI. Lessprep aims to automate some of the tedious tasks faced by teachers especially, but the tools are free for anyone to use. 
+Automated text-recognition from pictures, flashcard templates combined with an intuitive UI. LessPrep aims to automate some of the tedious tasks faced by teachers especially, but the tools are free for anyone to use. 
+
+## Demo
 Try out the demo [here!](https://lessprep.herokuapp.com/)
 
 ## Contributing
